@@ -1,5 +1,6 @@
 package com.joekramer.clashofclansplayerlook;
 
+import android.content.Intent;
 import android.os.Build;
 import android.widget.TextView;
 
@@ -8,7 +9,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
 
 import static junit.framework.Assert.assertTrue;
 
@@ -27,5 +30,14 @@ public class MainActivityTest {
     public void validateTextViewContent() {
         TextView titleTextView = (TextView) activity.findViewById(R.id.titleTextView);
         assertTrue("Look up Clan's stats".equals(titleTextView.getText().toString()));
+    }
+
+    @Test
+    public void secondActivityStarted() {
+        activity.findViewById(R.id.lookupPlayerButton).performClick();
+        Intent expectedIntent = new Intent(activity, PlayerActivity.class);
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        Intent actualIntent = shadowActivity.getNextStartedActivity();
+        assertTrue(actualIntent.filterEquals(expectedIntent));
     }
 }
