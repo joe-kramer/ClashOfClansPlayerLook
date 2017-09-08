@@ -6,15 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class PlayerActivity extends AppCompatActivity {
     @Bind(R.id.playerTitleTextView) TextView mPlayerTitleTextView;
-    @Bind(R.id.toClanMembersListButton) Button mToClanMembersListButton;
+    @Bind(R.id.clanMembersListView) ListView mClanMembersListView;
     private String[] members = new String[] {
             "Ryan Moloney",
             "Sam Kramer",
@@ -40,14 +43,18 @@ public class PlayerActivity extends AppCompatActivity {
         String playerCode = intent.getStringExtra("playerCode");
         mPlayerTitleTextView.setText(playerCode);
 
-        mToClanMembersListButton.setOnClickListener(new View.OnClickListener() {
+        //set ListView
+        MyMembersArrayAdapter adapter = new MyMembersArrayAdapter(this, android.R.layout.simple_list_item_1, members);
+        mClanMembersListView.setAdapter(adapter);
+
+        //set toast on list item click
+        mClanMembersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                //send to ClanMemberListView activity
-                Intent intent = new Intent(PlayerActivity.this, ClanMembersListActivity.class);
-                intent.putExtra("members", members);
-                startActivity(intent);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String member = ((TextView) view).getText().toString();
+                Toast.makeText(PlayerActivity.this, member, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }

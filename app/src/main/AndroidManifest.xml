@@ -22,7 +22,6 @@
                 android:value="com.joekramer.clashofclansplayerlook.MainActivity">
             </meta-data>
         </activity>
-        <activity android:name=".ClanMembersListActivity"></activity>
     </application>
 
 </manifest>

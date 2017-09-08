@@ -1,6 +1,5 @@
 package com.joekramer.clashofclansplayerlook;
 
-
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
@@ -17,9 +16,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.core.IsNot.not;
 
-public class ClanMembersListActivityInstrumentationTest {
+
+public class PlayerActivityIntrumentedTest {
     @Rule
-    public ActivityTestRule<ClanMembersListActivity> activityTestRule = new ActivityTestRule<>(ClanMembersListActivity.class);
+    public ActivityTestRule<PlayerActivity> activityTestRule = new ActivityTestRule<>(PlayerActivity.class);
 
     @Test
     public void listItemClickDisplaysToastWithCorrectMember() {

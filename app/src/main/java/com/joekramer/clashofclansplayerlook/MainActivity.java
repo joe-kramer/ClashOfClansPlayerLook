@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-
+//TODO: implement OnClick Interface (week 1 tuesday)
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.titleTextView) TextView mTitleTextView;
