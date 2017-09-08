@@ -20,7 +20,8 @@ public class ClanMembersListActivity extends AppCompatActivity {
             "Kyle Miyahara",
             "Michael Parrot",
             "Adam Johnson",
-            "Bryan Langdal"
+            "Bryan Langdal",
+            "Joe Kramer"
     };
 
     @Override
