@@ -2,6 +2,7 @@ package com.joekramer.clashofclansplayerlook;
 
 import android.content.Intent;
 import android.os.Build;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.junit.Before;
