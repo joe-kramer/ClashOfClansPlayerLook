@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.joekramer.clashofclansplayerlook.adapters.MemberListAdapter;
 import com.joekramer.clashofclansplayerlook.models.Clan;
 import com.joekramer.clashofclansplayerlook.services.CocService;
 import com.joekramer.clashofclansplayerlook.R;
@@ -26,43 +26,39 @@ import okhttp3.Response;
 
 public class ClanActivity extends AppCompatActivity {
     public static final String TAG = ClanActivity.class.getSimpleName();
-    @Bind(R.id.playerTitleTextView) TextView mPlayerTitleTextView;
-    @Bind(R.id.clanMembersListView) ListView mClanMembersListView;
+//    @Bind(R.id.playerTitleTextView) TextView mPlayerTitleTextView;
+
+
+    //for memberList recycleView
+    @Bind(R.id.memberListRecyclerView) RecyclerView mMemberListRecyclerView;
+    private MemberListAdapter mAdapter;
     public Clan mClan = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player);
+        setContentView(R.layout.activity_clan);
         ButterKnife.bind(this);
 
-        //font
-        Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
-        mPlayerTitleTextView.setTypeface(titleFont);
-
-        //set title
+        //get clanTag
         Intent intent = getIntent();
         String clanTag = intent.getStringExtra("clanTag");
-        mPlayerTitleTextView.setText(clanTag);
-
-
-//        //set toast on list item click
-//        mClanMembersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String member = ((TextView) view).getText().toString();
-//                Toast.makeText(ClanActivity.this, member, Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         //set clan
         getClanInfo(clanTag);
 
+        //font
+//        Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
+//        mPlayerTitleTextView.setTypeface(titleFont);
+
+        //set title
+//        mPlayerTitleTextView.setText(clanTag);
     }
 
     private void getClanInfo(String clanTag) {
         final CocService cocService = new CocService();
         cocService.findClan(clanTag, new Callback() {
+
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
@@ -82,13 +78,17 @@ public class ClanActivity extends AppCompatActivity {
                         ClanActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                //set info that you want user to see
-                                String[] memberNames = new String[mClan.mMemberList.size()];
-                                for(int i = 0; i < mClan.mMemberList.size(); i++) {
-                                    memberNames[i] = mClan.mMemberList.get(i).getName();
-                                }
-                                ArrayAdapter adapter = new ArrayAdapter(ClanActivity.this, android.R.layout.simple_list_item_1, memberNames);
-                                mClanMembersListView.setAdapter(adapter);
+                                //set MemberListRecycleView
+                                mAdapter = new MemberListAdapter(getApplicationContext(), mClan.mMemberList);
+                                mMemberListRecyclerView.setAdapter(mAdapter);
+                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ClanActivity.this);
+                                mMemberListRecyclerView.setLayoutManager(layoutManager);
+                                mMemberListRecyclerView.setHasFixedSize(true);
+//                                Log.v(TAG, mClan.mTag);
+//                                Log.v(TAG, mClan.mName);
+//                                Log.v(TAG, mClan.mDescription);
+//                                Log.v(TAG, mClan.mLocationName);
+//                                Log.v(TAG, mClan.mBadgeUrl);
                             }
                         });
                     }
