@@ -38,6 +38,7 @@ public class CocService {
             encodedClanTag = "INVALID";
         }
 
+        //TODO add better error message for ip not valid
         //factory for calls, which can be used to send http requests and read their responses
         OkHttpClient client = new OkHttpClient.Builder().build();
 
@@ -48,18 +49,18 @@ public class CocService {
 
         //Create new request
         Request request = new Request.Builder().url(url)
-                .addHeader("Authorization", "Bearer " + Constants.COC_TOKEN_TAYLORS_HOUSE).build();
+                .addHeader("Authorization", "Bearer " + Constants.COC_TOKEN_HOT_SPOT).build();
         Call call = client.newCall(request);
         call.enqueue(callback);
     }
 
     //put api response from clan info api into models
-    public static Clan processClanResults(Response response) {
+    public static Clan processClanResults(Response response, String jsonData) {
         Clan clan = null;
         ArrayList<Member> memberList = new ArrayList<>();
 
         try {
-            String jsonData = response.body().string();
+//            String jsonData = response.body().string();
             if(response.isSuccessful()) {
                 JSONObject clanJSON = new JSONObject(jsonData);
 
@@ -91,7 +92,7 @@ public class CocService {
                     int memberExpLevel = memberJSON.getInt("expLevel");
                     int leagueId = memberJSON.getJSONObject("league").getInt("id");
                     String leagueName = memberJSON.getJSONObject("league").getString("name");
-                    String leagueIconUrl = memberJSON.getJSONObject("league").getString("small");
+                    String leagueIconUrl = memberJSON.getJSONObject("league").getJSONObject("iconUrls").getString("small");
                     int memberTrophies = memberJSON.getInt("trophies");
                     int memberVersusTrophies = memberJSON.getInt("versusTrophies");
                     int memberClanRank = memberJSON.getInt("clanRank");
@@ -104,27 +105,33 @@ public class CocService {
                     memberList.add(newMember);
                 }
 
-                clan.mTag = tag;
-                clan.mName =name;
-                clan.mType = type;
-                clan.mDescription = description;
-                clan.mLocationId = locationId;
-                clan.mLocationName = locationName;
-                clan.mBadgeUrl = badgeUrl;
-                clan.mClanLevel = clanLevel;
-                clan.mClanPoints = clanPoints;
-                clan.mClanVersusPoints = clanVersusPoints;
-                clan.mRequiredTrophies = requiredTrophies;
-                clan.mWarWinStreak = warWinStreak;
-                clan.mWarWins = warWins;
-                clan.mWarTies = warTies;
-                clan.mWarLosses = warLosses;
-                clan.mMembers = members;
-                clan.mMemberList = memberList;
+                clan = new Clan(tag, name, type, description, locationId, locationName,
+                        badgeUrl, clanLevel, clanPoints, clanVersusPoints, requiredTrophies,
+                        warWinStreak, warWins, warTies, warLosses, members, memberList);
+
+//                clan.mTag = tag;
+//                clan.mName =name;
+//                clan.mType = type;
+//                clan.mDescription = description;
+//                clan.mLocationId = locationId;
+//                clan.mLocationName = locationName;
+//                clan.mBadgeUrl = badgeUrl;
+//                clan.mClanLevel = clanLevel;
+//                clan.mClanPoints = clanPoints;
+//                clan.mClanVersusPoints = clanVersusPoints;
+//                clan.mRequiredTrophies = requiredTrophies;
+//                clan.mWarWinStreak = warWinStreak;
+//                clan.mWarWins = warWins;
+//                clan.mWarTies = warTies;
+//                clan.mWarLosses = warLosses;
+//                clan.mMembers = members;
+//                clan.mMemberList = memberList;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
         Log.v(TAG, "Return clan");

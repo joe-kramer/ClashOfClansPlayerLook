@@ -78,7 +78,8 @@ public class PlayerActivity extends AppCompatActivity {
                     if(response.isSuccessful()) {
                         Log.v(TAG, jsonData);
                         //TODO could just put jsonData as response
-                        mClan = CocService.processClanResults(response);
+                        mClan = CocService.processClanResults(response, jsonData);
+                        Log.v(TAG, mClan.toString());
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
