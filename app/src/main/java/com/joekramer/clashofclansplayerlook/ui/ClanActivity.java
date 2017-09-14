@@ -26,13 +26,14 @@ import okhttp3.Response;
 
 public class ClanActivity extends AppCompatActivity {
     public static final String TAG = ClanActivity.class.getSimpleName();
-//    @Bind(R.id.playerTitleTextView) TextView mPlayerTitleTextView;
+    public Clan mClan = null;
+    //for Clan info
+    @Bind(R.id.clanNameTextView) TextView mClanNameTextView;
 
 
     //for memberList recycleView
     @Bind(R.id.memberListRecyclerView) RecyclerView mMemberListRecyclerView;
     private MemberListAdapter mAdapter;
-    public Clan mClan = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
