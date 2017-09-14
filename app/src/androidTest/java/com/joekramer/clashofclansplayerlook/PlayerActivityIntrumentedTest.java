@@ -3,6 +3,8 @@ package com.joekramer.clashofclansplayerlook;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
+import com.joekramer.clashofclansplayerlook.ui.PlayerActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 

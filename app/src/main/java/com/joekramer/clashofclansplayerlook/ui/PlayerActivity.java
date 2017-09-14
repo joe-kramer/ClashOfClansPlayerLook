@@ -1,4 +1,4 @@
-package com.joekramer.clashofclansplayerlook;
+package com.joekramer.clashofclansplayerlook.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -7,15 +7,24 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.joekramer.clashofclansplayerlook.services.CocService;
+import com.joekramer.clashofclansplayerlook.R;
+import com.joekramer.clashofclansplayerlook.adapters.MyMembersArrayAdapter;
+
+import java.io.IOException;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class PlayerActivity extends AppCompatActivity {
+    public static final String TAG = PlayerActivity.class.getSimpleName();
     @Bind(R.id.playerTitleTextView) TextView mPlayerTitleTextView;
     @Bind(R.id.clanMembersListView) ListView mClanMembersListView;
     private String[] members = new String[] {
@@ -56,5 +65,28 @@ public class PlayerActivity extends AppCompatActivity {
             }
         });
 
+        //Call to CocService
+        getPlayerInfo(playerCode);
+
+    }
+
+    private void getPlayerInfo(String playerTag) {
+        final CocService cocService = new CocService();
+        cocService.findPlayer(playerTag, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    String jsonData = response.body().string();
+                    Log.v(TAG, jsonData);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

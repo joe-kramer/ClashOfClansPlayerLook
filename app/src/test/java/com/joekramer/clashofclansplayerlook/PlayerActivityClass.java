@@ -4,6 +4,8 @@ package com.joekramer.clashofclansplayerlook;
 import android.os.Build;
 import android.widget.ListView;
 
+import com.joekramer.clashofclansplayerlook.ui.PlayerActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

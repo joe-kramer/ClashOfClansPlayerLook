@@ -1,4 +1,4 @@
-package com.joekramer.clashofclansplayerlook;
+package com.joekramer.clashofclansplayerlook.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.joekramer.clashofclansplayerlook.R;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 //TODO: implement OnClick Interface (week 1 tuesday)

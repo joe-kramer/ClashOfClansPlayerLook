@@ -2,6 +2,8 @@ package com.joekramer.clashofclansplayerlook;
 
 import android.support.test.rule.ActivityTestRule;
 
+import com.joekramer.clashofclansplayerlook.ui.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 

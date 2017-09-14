@@ -1,4 +1,4 @@
-package com.joekramer.clashofclansplayerlook;
+package com.joekramer.clashofclansplayerlook.adapters;
 
 
 import android.content.Context;
