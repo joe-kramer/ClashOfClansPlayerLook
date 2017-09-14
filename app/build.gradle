@@ -21,6 +21,7 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'COC_TOKEN_HOT_SPOT', CocTokenHotSpot
         it.buildConfigField 'String', 'COC_TOKEN_TAYLORS_HOUSE', CocTokenTaylorsHouse
+        it.buildConfigField 'String', 'COC_TOKEN_ALUMNI_WIFI', CocTokenAlumniWifi
     }
     repositories {
         mavenCentral()

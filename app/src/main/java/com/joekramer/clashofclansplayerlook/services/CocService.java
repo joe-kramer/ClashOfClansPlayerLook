@@ -54,7 +54,7 @@ public class CocService {
         call.enqueue(callback);
     }
 
-    //put api response from clan info api into models
+    //puts api response from clan info api into models
     public static Clan processClanResults(Response response, String jsonData) {
         Clan clan = null;
         ArrayList<Member> memberList = new ArrayList<>();
@@ -108,24 +108,6 @@ public class CocService {
                 clan = new Clan(tag, name, type, description, locationId, locationName,
                         badgeUrl, clanLevel, clanPoints, clanVersusPoints, requiredTrophies,
                         warWinStreak, warWins, warTies, warLosses, members, memberList);
-
-//                clan.mTag = tag;
-//                clan.mName =name;
-//                clan.mType = type;
-//                clan.mDescription = description;
-//                clan.mLocationId = locationId;
-//                clan.mLocationName = locationName;
-//                clan.mBadgeUrl = badgeUrl;
-//                clan.mClanLevel = clanLevel;
-//                clan.mClanPoints = clanPoints;
-//                clan.mClanVersusPoints = clanVersusPoints;
-//                clan.mRequiredTrophies = requiredTrophies;
-//                clan.mWarWinStreak = warWinStreak;
-//                clan.mWarWins = warWins;
-//                clan.mWarTies = warTies;
-//                clan.mWarLosses = warLosses;
-//                clan.mMembers = members;
-//                clan.mMemberList = memberList;
             }
         }
 //        catch (IOException e) {

@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.widget.TextView;
 
+import com.joekramer.clashofclansplayerlook.ui.ClanActivity;
 import com.joekramer.clashofclansplayerlook.ui.MainActivity;
-import com.joekramer.clashofclansplayerlook.ui.PlayerActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class MainActivityTest {
     @Test
     public void secondActivityStarted() {
         activity.findViewById(R.id.lookupPlayerButton).performClick();
-        Intent expectedIntent = new Intent(activity, PlayerActivity.class);
+        Intent expectedIntent = new Intent(activity, ClanActivity.class);
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent actualIntent = shadowActivity.getNextStartedActivity();
         assertTrue(actualIntent.filterEquals(expectedIntent));

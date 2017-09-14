@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.titleTextView) TextView mTitleTextView;
     @Bind(R.id.lookupPlayerButton) Button mLookupPlayerButton;
-    @Bind(R.id.playerCodeEditText) EditText mPlayerCodeEditText;
+    @Bind(R.id.clanTagEditText) EditText mClanTagEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
         mLookupPlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String playerCode = mPlayerCodeEditText.getText().toString();
-                Log.d(TAG, playerCode);
+                String clanTag = mClanTagEditText.getText().toString();
+                Log.d(TAG, clanTag);
 
                 //send to player activity
-                Intent intent = new Intent(MainActivity.this, PlayerActivity.class);
-                intent.putExtra("playerCode", playerCode);
+                Intent intent = new Intent(MainActivity.this, ClanActivity.class);
+                intent.putExtra("clanTag", clanTag);
                 startActivity(intent);
             }
         });

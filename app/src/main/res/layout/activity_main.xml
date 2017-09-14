@@ -24,7 +24,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/playerCodeEditText"
+        android:id="@+id/clanTagEditText"
         android:background="@color/colorTextIcons"
         android:layout_above="@+id/lookupPlayerButton"
         android:padding="5dp"

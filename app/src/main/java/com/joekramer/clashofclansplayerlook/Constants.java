@@ -7,4 +7,5 @@ public class Constants {
     public static final String COC_MY_PLAYER_TAG = "%232U2RPQRVL";
     public static final String COC_TOKEN_TAYLORS_HOUSE = BuildConfig.COC_TOKEN_TAYLORS_HOUSE;
     public static final String COC_MY_CLAN_TAG = "#PO8RVRV9";
+    public static final String COC_TOKEN_ALUMNI_WIFI = BuildConfig.COC_TOKEN_ALUMNI_WIFI;
 }

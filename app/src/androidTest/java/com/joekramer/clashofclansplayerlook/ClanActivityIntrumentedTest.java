@@ -3,7 +3,7 @@ package com.joekramer.clashofclansplayerlook;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
-import com.joekramer.clashofclansplayerlook.ui.PlayerActivity;
+import com.joekramer.clashofclansplayerlook.ui.ClanActivity;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,9 +19,9 @@ import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.core.IsNot.not;
 
 
-public class PlayerActivityIntrumentedTest {
+public class ClanActivityIntrumentedTest {
     @Rule
-    public ActivityTestRule<PlayerActivity> activityTestRule = new ActivityTestRule<>(PlayerActivity.class);
+    public ActivityTestRule<ClanActivity> activityTestRule = new ActivityTestRule<>(ClanActivity.class);
 
     @Test
     public void listItemClickDisplaysToastWithCorrectMember() {

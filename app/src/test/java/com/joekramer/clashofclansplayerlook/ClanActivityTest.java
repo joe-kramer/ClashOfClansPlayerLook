@@ -4,7 +4,7 @@ package com.joekramer.clashofclansplayerlook;
 import android.os.Build;
 import android.widget.ListView;
 
-import com.joekramer.clashofclansplayerlook.ui.PlayerActivity;
+import com.joekramer.clashofclansplayerlook.ui.ClanActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,14 +18,14 @@ import static junit.framework.Assert.assertNotNull;
 
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
-public class PlayerActivityClass {
-    private PlayerActivity activity;
+public class ClanActivityTest {
+    private ClanActivity activity;
     private ListView mClanMembersListView;
 
 
     @Before
     public void setup() {
-        activity = Robolectric.setupActivity(PlayerActivity.class);
+        activity = Robolectric.setupActivity(ClanActivity.class);
         mClanMembersListView = (ListView) activity.findViewById(R.id.clanMembersListView);
 
     }
