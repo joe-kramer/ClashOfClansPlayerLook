@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.joekramer.clashofclansplayerlook.models.Clan;
 import com.joekramer.clashofclansplayerlook.services.CocService;
 import com.joekramer.clashofclansplayerlook.R;
 import com.joekramer.clashofclansplayerlook.adapters.MyMembersArrayAdapter;
@@ -27,15 +28,7 @@ public class PlayerActivity extends AppCompatActivity {
     public static final String TAG = PlayerActivity.class.getSimpleName();
     @Bind(R.id.playerTitleTextView) TextView mPlayerTitleTextView;
     @Bind(R.id.clanMembersListView) ListView mClanMembersListView;
-    private String[] members = new String[] {
-            "Ryan Moloney",
-            "Sam Kramer",
-            "Kyle Miyahara",
-            "Michael Parrot",
-            "Adam Johnson",
-            "Bryan Langdal",
-            "Joe Kramer"
-    };
+    public Clan mClan = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +46,8 @@ public class PlayerActivity extends AppCompatActivity {
         mPlayerTitleTextView.setText(playerCode);
 
         //set ListView
-        MyMembersArrayAdapter adapter = new MyMembersArrayAdapter(this, android.R.layout.simple_list_item_1, members);
-        mClanMembersListView.setAdapter(adapter);
+//        MyMembersArrayAdapter adapter = new MyMembersArrayAdapter(this, android.R.layout.simple_list_item_1, members);
+//        mClanMembersListView.setAdapter(adapter);
 
         //set toast on list item click
         mClanMembersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,7 +58,7 @@ public class PlayerActivity extends AppCompatActivity {
             }
         });
 
-        //Call to CocService
+        //set clan
         getPlayerInfo(playerCode);
 
     }
@@ -82,7 +75,11 @@ public class PlayerActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
+                    if(response.isSuccessful()) {
+                        Log.v(TAG, jsonData);
+                        //TODO could just put jsonData as response
+                        mClan = CocService.processClanResults(response);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
