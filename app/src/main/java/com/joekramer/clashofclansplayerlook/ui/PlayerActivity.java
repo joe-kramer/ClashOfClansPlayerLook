@@ -70,9 +70,9 @@ public class PlayerActivity extends AppCompatActivity {
 
     }
 
-    private void getPlayerInfo(String playerTag) {
+    private void getPlayerInfo(String clanTag) {
         final CocService cocService = new CocService();
-        cocService.findPlayer(playerTag, new Callback() {
+        cocService.findClan(clanTag, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
