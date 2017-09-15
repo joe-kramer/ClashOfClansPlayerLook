@@ -38,9 +38,10 @@ public class ClanActivity extends AppCompatActivity {
     public Clan mClan = null;
     //for Clan info
     @Bind(R.id.clanNameTextView) TextView mClanNameTextView;
+    @Bind(R.id.clanDescriptionTextView) TextView mClanDescriptionTextView;
 
     //background
-    @Bind(R.id.picLinearLayout) LinearLayout mPicLinearLayout;
+//    @Bind(R.id.picLinearLayout) LinearLayout mPicLinearLayout;
 
     //for memberList recycleView
     @Bind(R.id.memberListRecyclerView) RecyclerView mMemberListRecyclerView;
@@ -96,12 +97,31 @@ public class ClanActivity extends AppCompatActivity {
 
                                 //display clan info
                                 mClanNameTextView.setText(mClan.mName);
+//                                mClanLevel
                                 //font
                                 Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
                                 mClanNameTextView.setTypeface(titleFont);
+                                mClanDescriptionTextView.setText(mClan.mDescription);
+//                                mTag
+//                                mType
+//                                mRequiredTrophies
+
+//                                mLocationName
+//                                mClanPoints
+//                                mClanVersusPoints
+//
+//                                mWarWinStreak
+//                                mWarWins
+//                                mWarTies
+//                                mWarLosses
+
+//                                mMembers
+
+
 
                                 //background on linear layout
-                                new LoadBackground(mClan.mBadgeUrl, "clanBackground").execute();                            }
+//                                new LoadBackground(mClan.mBadgeUrl, "clanBackground").execute();                            }
+                            }
                         });
                     }
                 } catch (IOException e) {
@@ -112,46 +132,46 @@ public class ClanActivity extends AppCompatActivity {
     }
 
 
-    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
-
-        private String imageUrl, imageName;
-
-        public LoadBackground(String url, String file_name) {
-            this.imageUrl = url;
-            this.imageName = file_name;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Drawable doInBackground(String... urls) {
-
-            try {
-                InputStream is = (InputStream) this.fetch(this.imageUrl);
-                Drawable d = Drawable.createFromStream(is, this.imageName);
-                return d;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return null;
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        private Object fetch(String address) throws MalformedURLException, IOException {
-            URL url = new URL(address);
-            Object content = url.getContent();
-            return content;
-        }
-
-        @Override
-        protected void onPostExecute(Drawable result) {
-            super.onPostExecute(result);
-            mPicLinearLayout.setBackground(result);
-        }
-    }
+//    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
+//
+//        private String imageUrl, imageName;
+//
+//        public LoadBackground(String url, String file_name) {
+//            this.imageUrl = url;
+//            this.imageName = file_name;
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//        }
+//
+//        @Override
+//        protected Drawable doInBackground(String... urls) {
+//
+//            try {
+//                InputStream is = (InputStream) this.fetch(this.imageUrl);
+//                Drawable d = Drawable.createFromStream(is, this.imageName);
+//                return d;
+//            } catch (MalformedURLException e) {
+//                e.printStackTrace();
+//                return null;
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return null;
+//            }
+//        }
+//
+//        private Object fetch(String address) throws MalformedURLException, IOException {
+//            URL url = new URL(address);
+//            Object content = url.getContent();
+//            return content;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Drawable result) {
+//            super.onPostExecute(result);
+//            mPicLinearLayout.setBackground(result);
+//        }
+//    }
 }
