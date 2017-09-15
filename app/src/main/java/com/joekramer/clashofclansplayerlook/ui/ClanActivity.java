@@ -1,13 +1,17 @@
 package com.joekramer.clashofclansplayerlook.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,8 +19,13 @@ import com.joekramer.clashofclansplayerlook.adapters.MemberListAdapter;
 import com.joekramer.clashofclansplayerlook.models.Clan;
 import com.joekramer.clashofclansplayerlook.services.CocService;
 import com.joekramer.clashofclansplayerlook.R;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -30,6 +39,8 @@ public class ClanActivity extends AppCompatActivity {
     //for Clan info
     @Bind(R.id.clanNameTextView) TextView mClanNameTextView;
 
+    //background
+    @Bind(R.id.picLinearLayout) LinearLayout mPicLinearLayout;
 
     //for memberList recycleView
     @Bind(R.id.memberListRecyclerView) RecyclerView mMemberListRecyclerView;
@@ -48,9 +59,6 @@ public class ClanActivity extends AppCompatActivity {
         //set clan
         getClanInfo(clanTag);
 
-        //font
-//        Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
-//        mPlayerTitleTextView.setTypeface(titleFont);
 
         //set title
 //        mPlayerTitleTextView.setText(clanTag);
@@ -79,18 +87,21 @@ public class ClanActivity extends AppCompatActivity {
                         ClanActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                //set MemberListRecycleView
+                                //display MemberListRecycleView
                                 mAdapter = new MemberListAdapter(getApplicationContext(), mClan.mMemberList);
                                 mMemberListRecyclerView.setAdapter(mAdapter);
                                 RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ClanActivity.this);
                                 mMemberListRecyclerView.setLayoutManager(layoutManager);
                                 mMemberListRecyclerView.setHasFixedSize(true);
-//                                Log.v(TAG, mClan.mTag);
-//                                Log.v(TAG, mClan.mName);
-//                                Log.v(TAG, mClan.mDescription);
-//                                Log.v(TAG, mClan.mLocationName);
-//                                Log.v(TAG, mClan.mBadgeUrl);
-                            }
+
+                                //display clan info
+                                mClanNameTextView.setText(mClan.mName);
+                                //font
+                                Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
+                                mClanNameTextView.setTypeface(titleFont);
+
+                                //background on linear layout
+                                new LoadBackground(mClan.mBadgeUrl, "clanBackground").execute();                            }
                         });
                     }
                 } catch (IOException e) {
@@ -98,5 +109,49 @@ public class ClanActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
+
+        private String imageUrl, imageName;
+
+        public LoadBackground(String url, String file_name) {
+            this.imageUrl = url;
+            this.imageName = file_name;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Drawable doInBackground(String... urls) {
+
+            try {
+                InputStream is = (InputStream) this.fetch(this.imageUrl);
+                Drawable d = Drawable.createFromStream(is, this.imageName);
+                return d;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        private Object fetch(String address) throws MalformedURLException, IOException {
+            URL url = new URL(address);
+            Object content = url.getContent();
+            return content;
+        }
+
+        @Override
+        protected void onPostExecute(Drawable result) {
+            super.onPostExecute(result);
+            mPicLinearLayout.setBackground(result);
+        }
     }
 }

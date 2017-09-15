@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.joekramer.clashofclansplayerlook.R;
 import com.joekramer.clashofclansplayerlook.models.Member;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -64,6 +65,7 @@ public class MemberListAdapter extends RecyclerView.Adapter<MemberListAdapter.Me
             mMemberListNameTextView.setText(member.getName());
             mMemberListRoleTextView.setText(member.getRole());
             mMemberListClanRankTextView.setText("Clan Rank: " + member.getClanRank());
+            Picasso.with(mContext).load(member.getLeagueIconUrl()).into(mMemberListImageView);
         }
     }
 }

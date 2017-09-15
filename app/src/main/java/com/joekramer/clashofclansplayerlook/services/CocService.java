@@ -49,7 +49,7 @@ public class CocService {
 
         //Create new request
         Request request = new Request.Builder().url(url)
-                .addHeader("Authorization", "Bearer " + Constants.COC_TOKEN_HOT_SPOT).build();
+                .addHeader("Authorization", "Bearer " + Constants.COC_TOKEN_TAYLORS_HOUSE).build();
         Call call = client.newCall(request);
         call.enqueue(callback);
     }
@@ -71,7 +71,7 @@ public class CocService {
                 String description = clanJSON.getString("description");
                 int locationId = clanJSON.getJSONObject("location").getInt("id");
                 String locationName = clanJSON.getJSONObject("location").getString("name");
-                String badgeUrl = clanJSON.getJSONObject("badgeUrls").getString("small");
+                String badgeUrl = clanJSON.getJSONObject("badgeUrls").getString("large");
                 int clanLevel = clanJSON.getInt("clanLevel");
                 int clanPoints = clanJSON.getInt("clanPoints");
                 int clanVersusPoints = clanJSON.getInt("clanVersusPoints");

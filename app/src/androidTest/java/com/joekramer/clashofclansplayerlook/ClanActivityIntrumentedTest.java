@@ -20,18 +20,18 @@ import static org.hamcrest.core.IsNot.not;
 
 
 public class ClanActivityIntrumentedTest {
-    @Rule
-    public ActivityTestRule<ClanActivity> activityTestRule = new ActivityTestRule<>(ClanActivity.class);
-
-    @Test
-    public void listItemClickDisplaysToastWithCorrectMember() {
-        View activityDecorView = activityTestRule.getActivity().getWindow().getDecorView();
-        String memberName = "Ryan Moloney";
-        onData(anything())
-                .inAdapterView(withId(R.id.clanMembersListView))
-                .atPosition(0)
-                .perform(click());
-        onView(withText(memberName)).inRoot(withDecorView(not(activityDecorView)))
-                .check(matches(withText(memberName)));
-    }
+//    @Rule
+//    public ActivityTestRule<ClanActivity> activityTestRule = new ActivityTestRule<>(ClanActivity.class);
+//
+//    @Test
+//    public void listItemClickDisplaysToastWithCorrectMember() {
+//        View activityDecorView = activityTestRule.getActivity().getWindow().getDecorView();
+//        String memberName = "Ryan Moloney";
+//        onData(anything())
+//                .inAdapterView(withId(R.id.clanMembersListView))
+//                .atPosition(0)
+//                .perform(click());
+//        onView(withText(memberName)).inRoot(withDecorView(not(activityDecorView)))
+//                .check(matches(withText(memberName)));
+//    }
 }
