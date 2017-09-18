@@ -41,7 +41,9 @@ a successful response.
 * _Deploy Api_
 * _Call api from android, inputting clanTag input as query parameter_
 
-## App Breakdown:
+## App:
+
+#### Setup
 * _clone down app_
 * _input clan tag into input on first page (removed)_
 * _clan tag is urlEncoded and passed to service_
