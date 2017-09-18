@@ -10,7 +10,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
 import com.joekramer.clashofclansplayerlook.adapters.MemberListAdapter;
 import com.joekramer.clashofclansplayerlook.models.Clan;
+import com.joekramer.clashofclansplayerlook.models.Member;
 import com.joekramer.clashofclansplayerlook.services.CocService;
 import com.joekramer.clashofclansplayerlook.R;
 import com.joekramer.clashofclansplayerlookup.clientsdk.GetClanInfoAPIClient;
@@ -30,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -40,6 +44,7 @@ import okhttp3.Response;
 public class ClanActivity extends AppCompatActivity {
     public static final String TAG = ClanActivity.class.getSimpleName();
     public Clan mClan = null;
+    @Bind(R.id.getMembersButton) Button mGetMembersButton;
     //for Clan info
     @Bind(R.id.clanNameTextView) TextView mClanNameTextView;
     @Bind(R.id.clanLevelTextView) TextView mClanLevelTextView;
@@ -69,6 +74,20 @@ public class ClanActivity extends AppCompatActivity {
 
         //set clan
         getClanInfo(clanTag);
+
+        //set button
+//        mGetMembersButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Member[] memberlist = mClanTagEditText.getText().toString();
+//                Log.d(TAG, clanTag);
+//
+//                //send to player activity
+//                Intent intent = new Intent(MainActivity.this, ClanActivity.class);
+//                intent.putExtra("clanTag", clanTag);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     private void getClanInfo(String clanTag) {
@@ -125,6 +144,20 @@ public class ClanActivity extends AppCompatActivity {
 //                                mWarLosses
 
 //                                mMembers
+
+                                mGetMembersButton.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        ArrayList<Member> memberlist = mClan.mMemberList;
+                                        Log.d(TAG, memberlist.toArray().toString());
+
+                                        //send to player activity
+                                        Intent intent = new Intent(ClanActivity.this, MemberListActivity.class);
+                                        intent.putExtra("members", memberlist);
+                                        startActivity(intent);
+                                    }
+                                });
+                                mGetMembersButton.setText("View clan's " + mClan.mMembers + " members");
 
 
 
