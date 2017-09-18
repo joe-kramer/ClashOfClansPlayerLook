@@ -1,6 +1,6 @@
 # Clash of Clans - Clan lookup
 
-### AWS:
+## AWS:
 The clash of clans api documentation requires you to register your IP address
 to receive your key. This leads to problems (with moble development especially)
 because our IP is always changing. To work around this, I created an AWS VPC and
@@ -41,7 +41,7 @@ a successful response.
 * _Deploy Api_
 * _Call api from android, inputting clanTag input as query parameter_
 
-### App Setup
+## App Breakdown:
 * _clone down app_
 * _input clan tag into input on first page (removed)_
 * _clan tag is urlEncoded and passed to service_
