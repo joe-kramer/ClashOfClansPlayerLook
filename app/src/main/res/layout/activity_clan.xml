@@ -29,25 +29,25 @@
         <!--app:srcCompat="@drawable/barbarianking"-->
         <!--tools:layout_editor_absoluteX="11dp" />-->
 
-        //ROW 1 title
-
+        <!--ROW 1 title-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/clanNameTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:gravity="center_horizontal"
-                android:text="TextView"
+                android:text="Loading clan name..."
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="26sp"
                 app:layout_constraintHorizontal_bias="0.501"
@@ -57,17 +57,16 @@
 
             <TextView
                 android:id="@+id/clanLevelTextView"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="right"
-                android:layout_weight="1"
-                android:text="clanLevel" />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:text="Loading clan level..."
+                android:textSize="18dp"/>
 
         </LinearLayout>
 
-
-        //ROW 2 pic
-
+        <!--ROW 2 pic-->
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="0dp"
@@ -89,20 +88,21 @@
                 tools:layout_editor_absoluteX="11dp" />
         </LinearLayout>
 
-        //Row 3 Description
-
+        <!--Row 3 Description-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
-                android:text="Clan Description:"
+                android:text="Clan Description"
                 android:textSize="24dp" />
 
             <LinearLayout
@@ -123,7 +123,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Tag"
+                        android:text="Loading clan tag..."
                         android:textSize="14dp" />
 
                     <TextView
@@ -131,7 +131,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Description"
+                        android:text="Loading clan description..."
                         android:textSize="14dp" />
 
                 </LinearLayout>
@@ -148,7 +148,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Type"
+                        android:text="Loading clan type..."
                         android:textSize="14dp" />
 
                     <TextView
@@ -156,7 +156,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="RequiredTrophies"
+                        android:text="Loading required trophies"
                         android:textSize="14dp" />
 
                     <TextView
@@ -164,7 +164,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:text="Location"
+                        android:text="Loading location..."
                         android:textSize="14dp" />
 
                 </LinearLayout>
@@ -172,28 +172,114 @@
             </LinearLayout>
         </LinearLayout>
 
-
-        //ROW 4 Stats row
-
+        <!--ROW 4 Stats row-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
 
+            <!--Title-->
             <TextView
                 android:id="@+id/StatsTextView"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="0dp"
                 android:text="Stats"
-                android:textSize="32dp" />
+                android:textSize="24dp"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"/>
+
+            <!--Stat inputs-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <!--description/middle section-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/warStreakTextView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Loading war streak..."
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/clanPointsTextView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Loading clan points..."
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/clanVersusPointsTextView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Loading clan versus points..."
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <!--clan info/far right section-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/warWinsTextView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Loading war wins..."
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/warTiesTextView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Loading war ties..."
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/warLossesTextView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Loading war losses..."
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/warWinPercentageTextView"
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Loading war win percentage..."
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
-        //Row 5, button
-
+        <!--Row 5, button-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
 
             <Button
                 android:id="@+id/getMembersButton"
@@ -206,10 +292,7 @@
                 android:textColor="@color/colorTextIcons"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0" />
-
         </LinearLayout>
-
-
     </LinearLayout>
 
     <!--//bottom half-->
