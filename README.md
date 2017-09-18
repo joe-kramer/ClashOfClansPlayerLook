@@ -56,4 +56,19 @@ a successful response.
 telling them the correct format
 * _---Validation on button for length---_
 
+#### API Call To Get Clan JSON
+* _Clan tag input is declared query parameter to AWS API Gateway url_
+* _Call made to AWS API Gateway, which calls our AWS Lambda Function_
+* _AWS Lambda function makes api call in node.js to Clash of Clans API_
+* _AWS Lambda function is sent to public subnet of my AWS VPC_
+* _API call now comes from our Elastic IP address in our VPC_
+* _JSON is sent back down chain to android_
+
+#### API - On Response
+* _On API response, use runOnUiThread function, and inside set our displayed clan views. This
+must be done in this function to merge our "API work thread" with our UI(Main) thread.
+* _Set picture and resize using Picasso_
+
+
+
 

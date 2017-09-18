@@ -51,7 +51,6 @@ public class ClanActivity extends AppCompatActivity {
     public static final String TAG = ClanActivity.class.getSimpleName();
     public Clan mClan = null;
     @Bind(R.id.getMembersButton) Button mGetMembersButton;
-    //for Clan info
     @Bind(R.id.clanNameTextView) TextView mClanNameTextView;
     @Bind(R.id.clanLevelTextView) TextView mClanLevelTextView;
     @Bind(R.id.clanDescriptionTextView) TextView mClanDescriptionTextView;
@@ -96,6 +95,7 @@ public class ClanActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 try {
+                    //Json string coming back with slashes, need to reformat
                     String jsonData = response.body().string();
                     jsonData = jsonData.trim();
                     jsonData = jsonData.substring(1, jsonData.length() - 1);
@@ -103,23 +103,15 @@ public class ClanActivity extends AppCompatActivity {
                         Log.v(TAG, jsonData);
                         //TODO could just put jsonData as response
                         mClan = CocService.processClanResults(response, jsonData);
-//                        Log.v(TAG, mClan.mName);
 
                         //put response back onto main thread
                         ClanActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                //display MemberListRecycleView
-//                                mAdapter = new MemberListAdapter(getApplicationContext(), mClan.mMemberList);
-//                                mMemberListRecyclerView.setAdapter(mAdapter);
-//                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ClanActivity.this);
-//                                mMemberListRecyclerView.setLayoutManager(layoutManager);
-//                                mMemberListRecyclerView.setHasFixedSize(true);
-
                                 //CLAN INFO
                                 mClanNameTextView.setText(mClan.mName);
-                                mClanLevelTextView.setText("Clan Level :" + mClan.mClanLevel);
-                                //TODO put font on all
+                                mClanLevelTextView.setText("Clan Level: " + mClan.mClanLevel);
+                                //TODO put font on all/ use coc font
                                 //font
                                 Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
                                 mClanNameTextView.setTypeface(titleFont);
@@ -130,17 +122,17 @@ public class ClanActivity extends AppCompatActivity {
                                 .into(mClanBadgeImageView);
                                 mClanTagTextView.setText("Tag: " + mClan.mTag);
                                 mClanTypeTextView.setText("Type: " + mClan.mType);
-                                mClanRequiredTrophiesTextView.setText("Required Trophies" + mClan.mRequiredTrophies);
+                                mClanRequiredTrophiesTextView.setText("Required Trophies: " + mClan.mRequiredTrophies);
                                 mClanLocationTextView.setText(mClan.mLocationName);
-                                mClanPointsTextView.setText("Clan Points " + mClan.mClanPoints);
+                                mClanPointsTextView.setText("Clan Points: " + mClan.mClanPoints);
                                 mClanVersusPointsTextView.setText("Clan Versus Points: " + mClan.mClanVersusPoints);
                                 mWarStreakTextView.setText("Win Streak: " + mClan.mWarWinStreak);
                                 mWarWinsTextView.setText("War Wins: " + mClan.mWarWins);
                                 mWarTiesTextView.setText("War Ties: " + mClan.mWarTies);
-                                mWarLossesTextView.setText("War Losses :" + mClan.mWarLosses);
+                                mWarLossesTextView.setText("War Losses: " + mClan.mWarLosses);
                                 double winPercentage = (double) (mClan.mWarWins + mClan.mWarTies) / mClan.mWarLosses;
                                 DecimalFormat formatter = new DecimalFormat("#0.00");
-                                mWarWinPercentageTextView.setText("Win Percentage: " + formatter.format(winPercentage));
+                                mWarWinPercentageTextView.setText("Win Percentage: " + formatter.format(winPercentage) + "%");
 
                                 //set button
                                 mGetMembersButton.setOnClickListener(new View.OnClickListener() {
@@ -159,10 +151,8 @@ public class ClanActivity extends AppCompatActivity {
                                 });
                                 mGetMembersButton.setText("View clan's " + mClan.mMembers + " members");
 
-
-
                                 //background on linear layout
-//                                new LoadBackground(mClan.mBadgeUrl, "clanBackground").execute();                            }
+//                                new LoadBackground(mClan.mBadgeUrl, "clanBackground").execute();
                             }
                         });
 
