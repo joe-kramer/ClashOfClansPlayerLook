@@ -1,6 +1,12 @@
 # Clash of Clans - Clan lookup
 
 ### AWS:
+The clash of clans api documentation requires you to register your IP address
+to receive your key. This leads to problems (with moble development especially)
+because our IP is always changing. To work around this, I created an AWS VPC and
+associated an elastic IP. Then by configuring my Lambda function, which runs my api call,
+to run through this IP, I can call this Lambda function from anywhere and recieve 
+a successful response.
 #### Resources:
 ##### A VPC with:
 * Public Subnet
