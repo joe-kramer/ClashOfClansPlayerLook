@@ -9,199 +9,219 @@
     tools:layout_editor_absoluteY="0dp">
 
 
+    <LinearLayout
+        android:id="@+id/picLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/colorAccent"
+        android:orientation="vertical">
+
+        <!--<ImageView-->
+        <!--android:scaleType="centerCrop"-->
+        <!--android:id="@+id/imageView2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginBottom="0dp"-->
+        <!--android:layout_marginTop="0dp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/memberListRecyclerView"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="1.0"-->
+        <!--app:srcCompat="@drawable/barbarianking"-->
+        <!--tools:layout_editor_absoluteX="11dp" />-->
+
+        //ROW 1 title
+
         <LinearLayout
-            android:id="@+id/picLinearLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@color/colorAccent"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <!--<ImageView-->
-            <!--android:scaleType="centerCrop"-->
-            <!--android:id="@+id/imageView2"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_marginBottom="0dp"-->
-            <!--android:layout_marginTop="0dp"-->
-            <!--app:layout_constraintBottom_toTopOf="@+id/memberListRecyclerView"-->
-            <!--app:layout_constraintTop_toTopOf="parent"-->
-            <!--app:layout_constraintVertical_bias="1.0"-->
-            <!--app:srcCompat="@drawable/barbarianking"-->
-            <!--tools:layout_editor_absoluteX="11dp" />-->
+            <TextView
+                android:id="@+id/clanNameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="2"
+                android:gravity="center_horizontal"
+                android:text="TextView"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="26sp"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            //ROW 1 title
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+            <TextView
+                android:id="@+id/clanLevelTextView"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:text="clanLevel" />
 
-                <TextView
-                    android:id="@+id/clanNameTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center_horizontal"
-                    android:text="TextView"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="26sp"
-                    app:layout_constraintHorizontal_bias="0.501"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_weight="2"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
-                    android:text="clanLevel"
-                    android:id="@+id/clanLevelTextView"
-                    android:layout_gravity="right"
-                    android:layout_weight="1"/>
-
-            </LinearLayout>
+        </LinearLayout>
 
 
-            //ROW 2 pic
-            <LinearLayout
-                android:layout_width="200dp"
-                android:layout_height="0dp"
-                android:layout_weight="4" >
+        //ROW 2 pic
 
-                <ImageView
-                android:scaleType="centerCrop"
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:layout_weight="4">
+
+            <ImageView
                 android:id="@+id/clanBadgeImageView"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="0dp"
                 android:layout_marginTop="0dp"
+                android:layout_weight="2"
+                android:gravity="center_horizontal"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/memberListRecyclerView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/barbarianking"
-                tools:layout_editor_absoluteX="11dp"
-                    android:layout_weight="2"
-                    android:layout_gravity="center_vertical"/>
-            </LinearLayout>
+                tools:layout_editor_absoluteX="11dp" />
+        </LinearLayout>
 
-            //Row 3 Description
+        //Row 3 Description
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="Clan Description:"
+                android:textSize="24dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:orientation="horizontal"
-                android:layout_weight="2" >
+                android:layout_weight="2"
+                android:orientation="horizontal">
 
                 <!--description/middle section-->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="2">
+                    android:layout_weight="2"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="0dp"
-                        android:text="Tag"
-                        android:textSize="14dp"
                         android:id="@+id/clanTagTextView"
-                        android:layout_weight="1"/>
-
-                    <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
-                        android:text="Description"
-                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:text="Tag"
+                        android:textSize="14dp" />
+
+                    <TextView
                         android:id="@+id/clanDescriptionTextView"
-                        android:layout_weight="1"/>
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Description"
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
                 <!--clan info/far right section-->
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
-                    android:layout_weight="2">
+                    android:layout_weight="2"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="0dp"
-                        android:text="Type"
-                        android:textSize="14dp"
                         android:id="@+id/clanTypeTextView"
-                        android:layout_weight="1"/>
-
-                    <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
-                        android:text="RequiredTrophies"
-                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:text="Type"
+                        android:textSize="14dp" />
+
+                    <TextView
                         android:id="@+id/clanRequiredTrophiesTextView"
-                        android:layout_weight="1"/>
-
-                    <TextView
                         android:layout_width="fill_parent"
                         android:layout_height="0dp"
-                        android:text="Location"
-                        android:textSize="14dp"
+                        android:layout_weight="1"
+                        android:text="RequiredTrophies"
+                        android:textSize="14dp" />
+
+                    <TextView
                         android:id="@+id/clanLocationTextView"
-                        android:layout_weight="1"/>
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:text="Location"
+                        android:textSize="14dp" />
 
                 </LinearLayout>
 
             </LinearLayout>
+        </LinearLayout>
 
-            //ROW 4 Stats row
-            <LinearLayout
+
+        //ROW 4 Stats row
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <TextView
+                android:id="@+id/StatsTextView"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2">
+                android:layout_height="fill_parent"
+                android:text="Stats"
+                android:textSize="32dp" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Stats"
-                    android:textSize="32dp"
-                    android:id="@+id/StatsTextView" />
-            </LinearLayout>
+        //Row 5, button
 
-            //Row 5, button
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/getMembersButton"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <Button
-                    android:id="@+id/getMembersButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="0dp"
-                    android:background="@color/colorPrimaryLight"
-                    android:text="Go to Members"
-                    android:textColor="@color/colorTextIcons"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    android:layout_gravity="bottom"/>
-
-            </LinearLayout>
-
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="0dp"
+                android:background="@color/colorPrimaryLight"
+                android:text="Go to Members"
+                android:textColor="@color/colorTextIcons"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0" />
 
         </LinearLayout>
 
-        <!--//bottom half-->
-        <!--<LinearLayout-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight=".4">-->
 
-            <!--<android.support.v7.widget.RecyclerView-->
-                <!--android:layout_height="fill_parent"-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:id="@+id/memberListRecyclerView" />-->
+    </LinearLayout>
 
-        <!--</LinearLayout>-->
+    <!--//bottom half-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight=".4">-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:id="@+id/memberListRecyclerView" />-->
+
+    <!--</LinearLayout>-->
 </android.support.constraint.ConstraintLayout>
-

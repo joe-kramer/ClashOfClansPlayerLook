@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //TODO move text Validation to own class
         //text validation
         mClanTagEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
@@ -74,6 +75,5 @@ public class MainActivity extends AppCompatActivity {
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
-
     }
 }

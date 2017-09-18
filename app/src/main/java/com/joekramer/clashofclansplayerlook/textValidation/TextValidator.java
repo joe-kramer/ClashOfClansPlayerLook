@@ -3,6 +3,9 @@ package com.joekramer.clashofclansplayerlook.textValidation;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.joekramer.clashofclansplayerlook.ui.MainActivity;
 
 
 public abstract class TextValidator implements TextWatcher {
@@ -16,8 +19,21 @@ public abstract class TextValidator implements TextWatcher {
 
     @Override
     final public void afterTextChanged(Editable s) {
-        String text = textView.getText().toString();
-        validate(textView, text);
+
+        String filtered_str = s.toString();
+
+        if (filtered_str.matches(".*[^A-Z^0-9^#].*")) {
+
+            filtered_str = filtered_str.replaceAll("[^a-z^0-9]", "");
+
+            s.clear();
+
+            // s.insert(0, filtered_str);
+            //TODO set length validation
+            Toast.makeText(textView.getContext(),
+                    "Hash mark, with combination of uppercase letters and numbers",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

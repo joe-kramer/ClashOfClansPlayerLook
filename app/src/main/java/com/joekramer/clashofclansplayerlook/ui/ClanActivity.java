@@ -37,6 +37,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -58,13 +60,16 @@ public class ClanActivity extends AppCompatActivity {
     @Bind(R.id.clanTypeTextView) TextView mClanTypeTextView;
     @Bind(R.id.clanLocationTextView) TextView mClanLocationTextView;
     @Bind(R.id.clanRequiredTrophiesTextView) TextView mClanRequiredTrophiesTextView;
+    @Bind(R.id.warStreakTextView) TextView mWarStreakTextView;
+    @Bind(R.id.clanPointsTextView) TextView mClanPointsTextView;
+    @Bind(R.id.clanVersusPointsTextView) TextView mClanVersusPointsTextView;
+    @Bind(R.id.warWinsTextView) TextView mWarWinsTextView;
+    @Bind(R.id.warTiesTextView) TextView mWarTiesTextView;
+    @Bind(R.id.warLossesTextView) TextView mWarLossesTextView;
+    @Bind(R.id.warWinPercentageTextView) TextView mWarWinPercentageTextView;
 
     //background
 //    @Bind(R.id.picLinearLayout) LinearLayout mPicLinearLayout;
-
-    //for memberList recycleView
-//    @Bind(R.id.memberListRecyclerView) RecyclerView mMemberListRecyclerView;
-//    private MemberListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,20 +83,6 @@ public class ClanActivity extends AppCompatActivity {
 
         //set clan
         getClanInfo(clanTag);
-
-        //set button
-//        mGetMembersButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Member[] memberlist = mClanTagEditText.getText().toString();
-//                Log.d(TAG, clanTag);
-//
-//                //send to player activity
-//                Intent intent = new Intent(MainActivity.this, ClanActivity.class);
-//                intent.putExtra("clanTag", clanTag);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     private void getClanInfo(String clanTag) {
@@ -127,11 +118,13 @@ public class ClanActivity extends AppCompatActivity {
 
                                 //CLAN INFO
                                 mClanNameTextView.setText(mClan.mName);
-                                mClanLevelTextView.setText(Integer.toString(mClan.mClanLevel));
+                                mClanLevelTextView.setText("Clan Level :" + mClan.mClanLevel);
+                                //TODO put font on all
                                 //font
                                 Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
                                 mClanNameTextView.setTypeface(titleFont);
                                 mClanDescriptionTextView.setText(mClan.mDescription);
+                                //TODO center badge and make width based off height
 //                                //clan badge pic
                                 Picasso.with(getApplicationContext()).load(mClan.mBadgeUrl)
                                 .into(mClanBadgeImageView);
@@ -139,16 +132,17 @@ public class ClanActivity extends AppCompatActivity {
                                 mClanTypeTextView.setText("Type: " + mClan.mType);
                                 mClanRequiredTrophiesTextView.setText("Required Trophies" + mClan.mRequiredTrophies);
                                 mClanLocationTextView.setText(mClan.mLocationName);
-//                                mClanPoints
-//                                mClanVersusPoints
-//
-//                                mWarWinStreak
-//                                mWarWins
-//                                mWarTies
-//                                mWarLosses
+                                mClanPointsTextView.setText("Clan Points " + mClan.mClanPoints);
+                                mClanVersusPointsTextView.setText("Clan Versus Points: " + mClan.mClanVersusPoints);
+                                mWarStreakTextView.setText("Win Streak: " + mClan.mWarWinStreak);
+                                mWarWinsTextView.setText("War Wins: " + mClan.mWarWins);
+                                mWarTiesTextView.setText("War Ties: " + mClan.mWarTies);
+                                mWarLossesTextView.setText("War Losses :" + mClan.mWarLosses);
+                                double winPercentage = (double) (mClan.mWarWins + mClan.mWarTies) / mClan.mWarLosses;
+                                DecimalFormat formatter = new DecimalFormat("#0.00");
+                                mWarWinPercentageTextView.setText("Win Percentage: " + formatter.format(winPercentage));
 
-//                                mMembers
-
+                                //set button
                                 mGetMembersButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
