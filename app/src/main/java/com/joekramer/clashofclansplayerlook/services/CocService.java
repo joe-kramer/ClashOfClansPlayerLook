@@ -1,10 +1,14 @@
 package com.joekramer.clashofclansplayerlook.services;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
+import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
 import com.joekramer.clashofclansplayerlook.Constants;
 import com.joekramer.clashofclansplayerlook.models.Clan;
 import com.joekramer.clashofclansplayerlook.models.Member;
+import com.joekramer.clashofclansplayerlookup.clientsdk.GetClanInfoAPIClient;
+import com.joekramer.clashofclansplayerlookup.clientsdk.model.Empty;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,13 +27,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class CocService {
+public class CocService  {
     public static final String TAG = CocService.class.getSimpleName();
 
-    //get clan info
+//    get clan info
     public static void findClan(String clanTag, Callback callback) {
         String encodedClanTag;
-        //encode clanTag
         try {
             encodedClanTag = URLEncoder.encode(Constants.COC_MY_CLAN_TAG, "UTF-8");
             Log.v(TAG, encodedClanTag);
@@ -38,18 +41,16 @@ public class CocService {
             encodedClanTag = "INVALID";
         }
 
-        //TODO add better error message for ip not valid
-        //factory for calls, which can be used to send http requests and read their responses
+//        TODO add better error message for ip not valid
         OkHttpClient client = new OkHttpClient.Builder().build();
 
         //build url
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.COC_BASE_URL).newBuilder();
-        //urlBuilder.addQueryParameter(Constants.COC_MY_PLAYER_TAG, player);
-        String url = urlBuilder.build().toString().concat(encodedClanTag);
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.COC_API_GATEWAY_CLANS).newBuilder();
+        urlBuilder.addQueryParameter("clanInfo", encodedClanTag);
+        String url = urlBuilder.build().toString();
 
         //Create new request
-        Request request = new Request.Builder().url(url)
-                .addHeader("Authorization", "Bearer " + Constants.COC_TOKEN_TAYLORS_HOUSE).build();
+        Request request = new Request.Builder().url(url).build();
         Call call = client.newCall(request);
         call.enqueue(callback);
     }

@@ -23,16 +23,16 @@ public class ClanActivityTest {
     private ListView mClanMembersListView;
 
 
-    @Before
-    public void setup() {
-        activity = Robolectric.setupActivity(ClanActivity.class);
-        mClanMembersListView = (ListView) activity.findViewById(R.id.clanMembersListView);
-
-    }
-
-    @Test
-    public void clanMembersListViewPopulates() {
-        assertNotNull(mClanMembersListView.getAdapter());
-        assertEquals(mClanMembersListView.getAdapter().getCount(), 7);
-    }
+//    @Before
+//    public void setup() {
+//        activity = Robolectric.setupActivity(ClanActivity.class);
+//        mClanMembersListView = (ListView) activity.findViewById(R.id.clanMembersListView);
+//
+//    }
+//
+//    @Test
+//    public void clanMembersListViewPopulates() {
+//        assertNotNull(mClanMembersListView.getAdapter());
+//        assertEquals(mClanMembersListView.getAdapter().getCount(), 7);
+//    }
 }

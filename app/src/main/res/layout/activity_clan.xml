@@ -8,26 +8,11 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="0dp">
 
-    <!--Whole page-->
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="0dp"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="0dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="0dp">
 
-        <!--Upper half-->
         <LinearLayout
             android:id="@+id/picLinearLayout"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".6"
+            android:layout_height="fill_parent"
             android:background="@color/colorAccent"
             android:orientation="vertical">
 
@@ -47,12 +32,12 @@
             //ROW 1 title
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="4">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <TextView
                     android:id="@+id/clanNameTextView"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="8dp"
@@ -66,21 +51,29 @@
                     app:layout_constraintHorizontal_bias="0.501"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:text="clanLevel"
+                    android:id="@+id/clanLevelTextView"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
 
-            //ROW 2 pic left, description right
+            //ROW 2 pic
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal"
-                android:layout_weight="3" >
+                android:layout_width="200dp"
+                android:layout_height="0dp"
+                android:layout_weight="4" >
 
                 <ImageView
                 android:scaleType="centerCrop"
-                android:id="@+id/imageView2"
+                android:id="@+id/clanBadgeImageView"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_marginBottom="0dp"
@@ -90,23 +83,82 @@
                 app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/barbarianking"
                 tools:layout_editor_absoluteX="11dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="2"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
 
-                <TextView
+            //Row 3 Description
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="2" >
+
+                <!--description/middle section-->
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="fill_parent"
-                    android:text="Description"
-                    android:textSize="14dp"
-                    android:id="@+id/clanDescriptionTextView"
-                    android:layout_weight="2" />
+                    android:orientation="vertical"
+                    android:layout_weight="2">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:text="Tag"
+                        android:textSize="14dp"
+                        android:id="@+id/clanTagTextView"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:text="Description"
+                        android:textSize="14dp"
+                        android:id="@+id/clanDescriptionTextView"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
+
+                <!--clan info/far right section-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:text="Type"
+                        android:textSize="14dp"
+                        android:id="@+id/clanTypeTextView"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:text="RequiredTrophies"
+                        android:textSize="14dp"
+                        android:id="@+id/clanRequiredTrophiesTextView"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:text="Location"
+                        android:textSize="14dp"
+                        android:id="@+id/clanLocationTextView"
+                        android:layout_weight="1"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-            //ROW 3 Stats row
+            //ROW 4 Stats row
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="3">
+                android:layout_height="0dp"
+                android:layout_weight="2">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -116,21 +168,40 @@
                     android:id="@+id/StatsTextView" />
             </LinearLayout>
 
+            //Row 5, button
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/seeMembersButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/colorPrimaryLight"
+                    android:text="Go to Members"
+                    android:textColor="@color/colorTextIcons"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_gravity="bottom"/>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-        //bottom half
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight=".4">
+        <!--//bottom half-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight=".4">-->
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_height="fill_parent"
-                android:layout_width="fill_parent"
-                android:id="@+id/memberListRecyclerView" />
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:id="@+id/memberListRecyclerView" />-->
 
-        </LinearLayout>
-    </LinearLayout>
+        <!--</LinearLayout>-->
 </android.support.constraint.ConstraintLayout>
 
