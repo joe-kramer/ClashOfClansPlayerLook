@@ -43,6 +43,17 @@ a successful response.
 
 ### App Setup
 * _clone down app_
-* _input clan tag into input on first page (#PO8RVRV9)_
+* _input clan tag into input on first page (removed)_
 * _clan tag is urlEncoded and passed to service_
 * _api call is made through api gateway to lambda function and returns json_
+
+### App Features
+
+#### Input Validation
+* _create new textchangelistener on our editText that creates a new TestWatcher_
+* _Inside TextWatcher, validate code on text change_
+* _If code matches regex .*[^A-Z^0-9^#].* user will be prompted with a toast,
+telling them the correct format
+* _---Validation on button for length---_
+
+
