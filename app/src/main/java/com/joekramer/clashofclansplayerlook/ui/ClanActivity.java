@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +30,8 @@ import com.joekramer.clashofclansplayerlookup.clientsdk.GetClanInfoAPIClient;
 import com.joekramer.clashofclansplayerlookup.clientsdk.model.Empty;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import org.parceler.Parcels;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -148,12 +152,14 @@ public class ClanActivity extends AppCompatActivity {
                                 mGetMembersButton.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        ArrayList<Member> memberlist = mClan.mMemberList;
-                                        Log.d(TAG, memberlist.toArray().toString());
+                                        //TODO push only memberlist array, not whole clan
+                                        ArrayList<Member> memberList = mClan.mMemberList;
 
                                         //send to player activity
                                         Intent intent = new Intent(ClanActivity.this, MemberListActivity.class);
-                                        intent.putExtra("members", memberlist);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putParcelableArrayList("members", memberList);
+                                        intent.putExtra("membersBundle", bundle);
                                         startActivity(intent);
                                     }
                                 });
