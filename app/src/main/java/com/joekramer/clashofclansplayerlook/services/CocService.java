@@ -34,7 +34,7 @@ public class CocService  {
     public static void findClan(String clanTag, Callback callback) {
         String encodedClanTag;
         try {
-            encodedClanTag = URLEncoder.encode(Constants.COC_MY_CLAN_TAG, "UTF-8");
+            encodedClanTag = URLEncoder.encode(clanTag, "UTF-8");
             Log.v(TAG, encodedClanTag);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

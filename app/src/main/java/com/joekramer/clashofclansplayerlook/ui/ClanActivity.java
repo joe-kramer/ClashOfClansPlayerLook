@@ -115,6 +115,7 @@ public class ClanActivity extends AppCompatActivity {
                                 //font
                                 Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
                                 mClanNameTextView.setTypeface(titleFont);
+                                //TODO make description text area size adjustable. or click to see rest
                                 mClanDescriptionTextView.setText(mClan.mDescription);
                                 //TODO center badge and make width based off height
 //                                //clan badge pic
