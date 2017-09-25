@@ -1,6 +1,7 @@
 package com.joekramer.clashofclansplayerlook.models;
 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class Clan {
     int warLosses;
     int members;
     List<Member> memberList = new ArrayList<>();
+    double winLossRatio;
 
     public Clan(String tag, String name, String type, String description, int locationId,
                 String locationName, String badgeUrl, int clanLevel, int clanPoints,
@@ -46,6 +48,7 @@ public class Clan {
         this.warLosses = warLosses;
         this.members = members;
         this.memberList = memberList;
+        this.winLossRatio = (double) warWins / warLosses;
     }
 
     public String getTag() {
@@ -115,6 +118,8 @@ public class Clan {
     public List<Member> getMemberList() {
         return memberList;
     }
+
+    public double getWinLossRatio() { return winLossRatio; }
 
     //TODO getLargeImageURL
 }

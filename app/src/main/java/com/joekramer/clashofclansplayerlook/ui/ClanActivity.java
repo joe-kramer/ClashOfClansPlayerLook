@@ -141,9 +141,8 @@ public class ClanActivity extends AppCompatActivity {
                                 mWarWinsTextView.setText("War Wins: " + mClan.getWarWins());
                                 mWarTiesTextView.setText("War Ties: " + mClan.getWarTies());
                                 mWarLossesTextView.setText("War Losses: " + mClan.getWarLosses());
-                                double winPercentage = (double) mClan.getWarWins() / mClan.getWarLosses();
                                 DecimalFormat formatter = new DecimalFormat("#0.00");
-                                mWarWinPercentageTextView.setText("Win/Loss Ratio: " + formatter.format(winPercentage));
+                                mWarWinPercentageTextView.setText("Win/Loss Ratio: " + formatter.format(mClan.getWinLossRatio()));
 
                                 //set button
                                 mGetMembersButton.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +162,7 @@ public class ClanActivity extends AppCompatActivity {
                                 });
                                 mGetMembersButton.setText("View clan's " + mClan.getMembers() + " members");
 
-                                //background on linear layout
+                                //background on linear clan_list_item
 //                                new LoadBackground(mClan.mBadgeUrl, "clanBackground").execute();
                             }
                         });

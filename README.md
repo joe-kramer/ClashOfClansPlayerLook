@@ -71,6 +71,13 @@ telling them the correct format
 must be done in this function to merge our "API work thread" with our UI(Main) thread.
 * _Set picture and resize using Picasso_
 
+#### Menu Items
+* _Logout - Logs User out from App_
+* _Save - Save a clan to firebase under your registered account_
+
+#### Saved Clans List View
+* _Pass our custom FirebaseClanViewHolder into a FirebaseRecyclerAdapter_
+
 
 
 
