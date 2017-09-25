@@ -76,7 +76,14 @@ must be done in this function to merge our "API work thread" with our UI(Main) t
 * _Save - Save a clan to firebase under your registered account_
 
 #### Saved Clans List View
-* _Pass our custom FirebaseClanViewHolder into a FirebaseRecyclerAdapter_
+* _Reuse our memberlist recyclerView and layout as our new View in SavedClansListActivity_
+* _Create custom saved_clan_list_item.xml view for a new FirebaseClanViewHolder_
+* _Pass our custom FirebaseClanViewHolder into our mFirebaseAdapter_
+* _Set our RecyclerView to use our newly configured mFirebaseAdapter_
+* _When the activity is destroyed, cleanup() is called on the adapter so that it will stop listening for changes in Firebase._
+
+#### NavBar
+* _Coming_
 
 
 

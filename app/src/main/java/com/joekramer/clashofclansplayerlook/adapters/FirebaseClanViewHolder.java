@@ -4,27 +4,36 @@ package com.joekramer.clashofclansplayerlook.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.joekramer.clashofclansplayerlook.Constants;
 import com.joekramer.clashofclansplayerlook.R;
 import com.joekramer.clashofclansplayerlook.models.Clan;
+import com.joekramer.clashofclansplayerlook.ui.ClanActivity;
 import com.squareup.picasso.Picasso;
 
+import org.parceler.Parcels;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class FirebaseClanViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private static final String TAG = FirebaseClanViewHolder.class.getSimpleName();
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
 
     View mView;
     Context mContext;
+    private String clanTag;
 
     public FirebaseClanViewHolder(View itemView) {
         super(itemView);
@@ -34,26 +43,33 @@ public class FirebaseClanViewHolder extends RecyclerView.ViewHolder implements V
     }
 
     public void bindClan(Clan clan) {
-        ImageView clanImageView = (ImageView) mView.findViewById(R.id.clanImageView);
-        TextView nameTextView = (TextView) mView.findViewById(R.id.clanNameTextView);
-        TextView categoryTextView = (TextView) mView.findViewById(R.id.categoryTextView);
-        TextView ratingTextView = (TextView) mView.findViewById(R.id.ratingTextView);
+        ImageView mClanBadgeImageView = mView.findViewById(R.id.savedClanListImageView);
+        TextView mClanNameTextView = mView.findViewById(R.id.savedClanListNameTextView);
+        TextView mClanLevelTextView = mView.findViewById(R.id.savedClanListClanLevelTextView);
+        TextView mClanWinRatioTextView = mView.findViewById(R.id.savedClanListWinRatioTextView);
 
         Picasso.with(mContext)
-                .load(clan.getImageUrl())
+                .load(clan.getBadgeUrl())
                 .resize(MAX_WIDTH, MAX_HEIGHT)
                 .centerCrop()
-                .into(clanImageView);
+                .into(mClanBadgeImageView);
 
-        nameTextView.setText(clan.getName());
-        categoryTextView.setText(clan.getCategories().get(0));
-        ratingTextView.setText("Rating: " + clan.getRating() + "/5");
+        String clanName = clan.getName();
+        Log.d(TAG, clanName);
+        Log.d(TAG, "level: " + clan.getClanLevel());
+        Log.d(TAG, "ratio: " + clan.getWinLossRatio());
+
+        mClanNameTextView.setText(clanName);
+        mClanLevelTextView.setText("Clan Level: " + clan.getClanLevel());
+        mClanWinRatioTextView.setText(String.format( "Win/Loss Ratio: %.2f", clan.getWinLossRatio()));
+
+        clanTag = clan.getTag();
     }
 
     @Override
     public void onClick(View view) {
         final ArrayList<Clan> clans = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_CLANS);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
@@ -64,10 +80,8 @@ public class FirebaseClanViewHolder extends RecyclerView.ViewHolder implements V
 
                 int itemPosition = getLayoutPosition();
 
-                Intent intent = new Intent(mContext, ClanDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("clans", Parcels.wrap(clans));
-
+                Intent intent = new Intent(mContext, ClanActivity.class);
+                intent.putExtra("clanTag", clanTag);
                 mContext.startActivity(intent);
             }
 

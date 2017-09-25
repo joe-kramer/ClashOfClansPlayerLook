@@ -27,6 +27,8 @@ public class Clan {
     List<Member> memberList = new ArrayList<>();
     double winLossRatio;
 
+    public Clan() {}
+
     public Clan(String tag, String name, String type, String description, int locationId,
                 String locationName, String badgeUrl, int clanLevel, int clanPoints,
                 int clanVersusPoints, int requiredTrophies, int warWinStreak,

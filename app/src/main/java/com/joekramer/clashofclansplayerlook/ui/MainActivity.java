@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.lookupClanButton) Button mLookupClanButton;
     @Bind(R.id.clanTagEditText) EditText mClanTagEditText;
     @Bind(R.id.implicitTextView) TextView mImplicitTextView;
+    @Bind(R.id.savedClansListButton) Button mSavedClansListButton;
 
     //shared preferences
 //    private SharedPreferences mSharedPreferences;
@@ -93,8 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        //player lookup button
         mLookupClanButton.setOnClickListener(this);
+        mSavedClansListButton.setOnClickListener(this);
 
         //TODO move text Validation to own class
         //text validation
@@ -155,6 +156,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v == mImplicitTextView) {
             Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mImplicitTextView.getText().toString()));
             startActivity(webIntent);
+        }
+        if (v == mSavedClansListButton) {
+            Intent intent = new Intent(MainActivity.this, SavedClansListActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CoLeader"
+            android:text="Clan Level"
             android:id="@+id/savedClanListClanLevelTextView"
             android:layout_below="@+id/savedClanListNameTextView"
             android:layout_alignParentLeft="true"
@@ -44,10 +44,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Clan Rank: 2"
-                android:id="@+id/memberListClanRankTextView"
+                android:text="Win/Loss Ratio:"
+                android:id="@+id/savedClanListWinRatioTextView"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:textColor="@color/colorAccent"/>
         </RelativeLayout>
     </LinearLayout>
+</LinearLayout>
