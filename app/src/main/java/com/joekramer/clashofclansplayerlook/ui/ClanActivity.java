@@ -131,9 +131,9 @@ public class ClanActivity extends AppCompatActivity {
                                 mWarWinsTextView.setText("War Wins: " + mClan.mWarWins);
                                 mWarTiesTextView.setText("War Ties: " + mClan.mWarTies);
                                 mWarLossesTextView.setText("War Losses: " + mClan.mWarLosses);
-                                double winPercentage = (double) (mClan.mWarWins + mClan.mWarTies) / mClan.mWarLosses;
+                                double winPercentage = (double) mClan.mWarWins / mClan.mWarLosses;
                                 DecimalFormat formatter = new DecimalFormat("#0.00");
-                                mWarWinPercentageTextView.setText("Win Percentage: " + formatter.format(winPercentage) + "%");
+                                mWarWinPercentageTextView.setText("Win/Loss Ratio: " + formatter.format(winPercentage));
 
                                 //set button
                                 mGetMembersButton.setOnClickListener(new View.OnClickListener() {

@@ -45,7 +45,7 @@ a successful response.
 
 #### Setup
 * _clone down app_
-* _input clan tag into input on first page (removed)_
+* _input clan tag into input on first page (#QGJY8UR)_
 * _clan tag is urlEncoded and passed to service_
 * _api call is made through api gateway to lambda function and returns json_
 
