@@ -42,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.savedClansListButton) Button mSavedClansListButton;
 
     //shared preferences
-//    private SharedPreferences mSharedPreferences;
-//    private SharedPreferences.Editor mEditor;
-//    private String mRecentClanTag;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentClanTag;
 
     //firebase
     private DatabaseReference mSearchedClanReference;
@@ -60,39 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //font
         Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
         mTitleTextView.setTypeface(titleFont);
-
-        //shared preference
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        mEditor = mSharedPreferences.edit();
-
-        //test
-//        mRecentClanTag = mSharedPreferences.getString(Constants.PREFERENCES_CLANTAG_KEY, null);
-//        try {
-//            Log.d("Shared Pref Location", mRecentClanTag);
-//        } catch (NullPointerException e) {
-//            e.printStackTrace();
-//        }
-
-        //database
-        mSearchedClanReference = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child(Constants.FIREBASE_CHILD_SEARCHED_CLANS);
-
-        mSearchedClanReferenceListener = mSearchedClanReference.addValueEventListener(new ValueEventListener() { //attach listener
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) { //something changed!
-                for (DataSnapshot clanTagSnapshot : dataSnapshot.getChildren()) {
-                    String clanTag = clanTagSnapshot.getValue().toString();
-                    Log.d("ClanTag updated", "clanTag: " + clanTag); //log
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //update UI here if error occurred.
-            }
-        });
 
         mLookupClanButton.setOnClickListener(this);
         mSavedClansListButton.setOnClickListener(this);
@@ -141,13 +108,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String clanTag = mClanTagEditText.getText().toString();
             Log.d(TAG, clanTag);
 
-            saveClanToFirebase(clanTag);
-
-//            add to shared preferences
-//            if(!(clanTag).equals("")) {
-//                addToSharedPreferences(clanTag);
-//            }
-
             //send to player activity
             Intent intent = new Intent(MainActivity.this, ClanActivity.class);
             intent.putExtra("clanTag", clanTag);
@@ -161,14 +121,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, SavedClansListActivity.class);
             startActivity(intent);
         }
-    }
-
-//    private void addToSharedPreferences(String clanTag) {
-//        mEditor.putString(Constants.PREFERENCES_CLANTAG_KEY, clanTag)
-//                .apply();
-//    }
-
-    private void saveClanToFirebase(String clanTag) {
-        mSearchedClanReference.push().setValue(clanTag);
     }
 }

@@ -1,16 +1,20 @@
 package com.joekramer.clashofclansplayerlook.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -77,6 +81,11 @@ public class ClanActivity extends AppCompatActivity {
     @Bind(R.id.warLossesTextView) TextView mWarLossesTextView;
     @Bind(R.id.warWinPercentageTextView) TextView mWarWinPercentageTextView;
 
+    //shared preferences
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentClan;
+
     //background
 //    @Bind(R.id.picLinearLayout) LinearLayout mPicLinearLayout;
 
@@ -92,6 +101,15 @@ public class ClanActivity extends AppCompatActivity {
 
         //set clan
         getClanInfo(clanTag);
+
+        //shared preferences
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentClan = mSharedPreferences.getString(Constants.PREFERENCES_CLANTAG_KEY, null);
+        Log.d(TAG, mRecentClan);
+
+        if (mRecentClan != null) {
+            getClanInfo(mRecentClan);
+        }
     }
 
     private void getClanInfo(String clanTag) {
@@ -179,7 +197,30 @@ public class ClanActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                addToSharedPreferences(query);
+                getClanInfo(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+        });
+        return true;
     }
 
     @Override
@@ -194,6 +235,11 @@ public class ClanActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void addToSharedPreferences(String clanTag) {
+        mEditor.putString(Constants.PREFERENCES_CLANTAG_KEY, clanTag)
+                .apply();
     }
 
 //    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
