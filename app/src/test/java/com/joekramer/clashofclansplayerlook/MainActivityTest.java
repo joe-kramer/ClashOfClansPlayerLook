@@ -37,7 +37,7 @@ public class MainActivityTest {
 
     @Test
     public void secondActivityStarted() {
-        activity.findViewById(R.id.lookupPlayerButton).performClick();
+        activity.findViewById(R.id.lookupClanButton).performClick();
         Intent expectedIntent = new Intent(activity, ClanActivity.class);
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         Intent actualIntent = shadowActivity.getNextStartedActivity();

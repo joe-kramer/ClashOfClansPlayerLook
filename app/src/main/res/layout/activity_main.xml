@@ -26,17 +26,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/clanTagEditText"
         android:background="@color/colorTextIcons"
-        android:layout_above="@+id/lookupPlayerButton"
+        android:layout_above="@+id/lookupClanButton"
         android:padding="5dp"
         android:hint="Enter Player Code"
         android:layout_centerHorizontal="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginBottom="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/lookupPlayerButton" />
+        app:layout_constraintBottom_toTopOf="@+id/lookupClanButton" />
 
     <Button
-        android:id="@+id/lookupPlayerButton"
+        android:id="@+id/lookupClanButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="0dp"
@@ -52,7 +52,7 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="@+id/lookupPlayerButton"
+        app:layout_constraintBottom_toBottomOf="@+id/lookupClanButton"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

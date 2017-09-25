@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "310428980217",
+    "firebase_url": "https://clashofclansclanlookup.firebaseio.com",
+    "project_id": "clashofclansclanlookup",
+    "storage_bucket": "clashofclansclanlookup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310428980217:android:f891d34653144369",
+        "android_client_info": {
+          "package_name": "com.joekramer.clashofclansplayerlook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310428980217-134q4dhf74eq6d7h37lnfh2jck0camhl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.joekramer.clashofclansplayerlook",
+            "certificate_hash": "cfcc01e725205bf1fcfe1058f1d5df2b37b1ac0d"
+          }
+        },
+        {
+          "client_id": "310428980217-ienhfro5uoo6d99k8klod4jvlcll4tvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQEoMHf1Q4LHb4CVHozUgm-4ici9zkfqo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310428980217-ienhfro5uoo6d99k8klod4jvlcll4tvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
