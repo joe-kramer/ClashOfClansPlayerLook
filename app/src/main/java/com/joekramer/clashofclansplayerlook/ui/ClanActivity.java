@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,8 +22,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.joekramer.clashofclansplayerlook.Constants;
 import com.joekramer.clashofclansplayerlook.adapters.MemberListAdapter;
 import com.joekramer.clashofclansplayerlook.models.Clan;
 import com.joekramer.clashofclansplayerlook.models.Member;
@@ -40,12 +47,15 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+
+import static java.security.AccessController.getContext;
 
 public class ClanActivity extends AppCompatActivity {
     public static final String TAG = ClanActivity.class.getSimpleName();
@@ -109,29 +119,29 @@ public class ClanActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 //CLAN INFO
-                                mClanNameTextView.setText(mClan.mName);
-                                mClanLevelTextView.setText("Clan Level: " + mClan.mClanLevel);
+                                mClanNameTextView.setText(mClan.getName());
+                                mClanLevelTextView.setText("Clan Level: " + mClan.getClanLevel());
                                 //TODO put font on all/ use coc font
                                 //font
                                 Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
                                 mClanNameTextView.setTypeface(titleFont);
                                 //TODO make description text area size adjustable. or click to see rest
-                                mClanDescriptionTextView.setText(mClan.mDescription);
+                                mClanDescriptionTextView.setText(mClan.getDescription());
                                 //TODO center badge and make width based off height
 //                                //clan badge pic
-                                Picasso.with(getApplicationContext()).load(mClan.mBadgeUrl)
+                                Picasso.with(getApplicationContext()).load(mClan.getBadgeUrl())
                                 .into(mClanBadgeImageView);
-                                mClanTagTextView.setText("Tag: " + mClan.mTag);
-                                mClanTypeTextView.setText("Type: " + mClan.mType);
-                                mClanRequiredTrophiesTextView.setText("Required Trophies: " + mClan.mRequiredTrophies);
-                                mClanLocationTextView.setText(mClan.mLocationName);
-                                mClanPointsTextView.setText("Clan Points: " + mClan.mClanPoints);
-                                mClanVersusPointsTextView.setText("Clan Versus Points: " + mClan.mClanVersusPoints);
-                                mWarStreakTextView.setText("Win Streak: " + mClan.mWarWinStreak);
-                                mWarWinsTextView.setText("War Wins: " + mClan.mWarWins);
-                                mWarTiesTextView.setText("War Ties: " + mClan.mWarTies);
-                                mWarLossesTextView.setText("War Losses: " + mClan.mWarLosses);
-                                double winPercentage = (double) mClan.mWarWins / mClan.mWarLosses;
+                                mClanTagTextView.setText("Tag: " + mClan.getTag());
+                                mClanTypeTextView.setText("Type: " + mClan.getType());
+                                mClanRequiredTrophiesTextView.setText("Required Trophies: " + mClan.getRequiredTrophies());
+                                mClanLocationTextView.setText(mClan.getLocationName());
+                                mClanPointsTextView.setText("Clan Points: " + mClan.getClanPoints());
+                                mClanVersusPointsTextView.setText("Clan Versus Points: " + mClan.getClanVersusPoints());
+                                mWarStreakTextView.setText("Win Streak: " + mClan.getWarWinStreak());
+                                mWarWinsTextView.setText("War Wins: " + mClan.getWarWins());
+                                mWarTiesTextView.setText("War Ties: " + mClan.getWarTies());
+                                mWarLossesTextView.setText("War Losses: " + mClan.getWarLosses());
+                                double winPercentage = (double) mClan.getWarWins() / mClan.getWarLosses();
                                 DecimalFormat formatter = new DecimalFormat("#0.00");
                                 mWarWinPercentageTextView.setText("Win/Loss Ratio: " + formatter.format(winPercentage));
 
@@ -140,7 +150,8 @@ public class ClanActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         //TODO push only memberlist array, not whole clan
-                                        ArrayList<Member> memberList = mClan.mMemberList;
+                                        List<Member> memberList1 = mClan.getMemberList();
+                                        ArrayList<Member> memberList = (ArrayList<Member>) memberList1;
 
                                         //send to player activity
                                         Intent intent = new Intent(ClanActivity.this, MemberListActivity.class);
@@ -150,7 +161,7 @@ public class ClanActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
-                                mGetMembersButton.setText("View clan's " + mClan.mMembers + " members");
+                                mGetMembersButton.setText("View clan's " + mClan.getMembers() + " members");
 
                                 //background on linear layout
 //                                new LoadBackground(mClan.mBadgeUrl, "clanBackground").execute();
@@ -164,6 +175,27 @@ public class ClanActivity extends AppCompatActivity {
         });
     }
 
+    //menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_saveClan) {
+            DatabaseReference clansRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_CLANS);
+            clansRef.push().setValue(mClan);
+            Toast.makeText(ClanActivity.this, "Clan Saved", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 //    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
 //

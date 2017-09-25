@@ -12,6 +12,9 @@ import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //firebase
     private DatabaseReference mSearchedClanReference;
+    private ValueEventListener mSearchedClanReferenceListener;
 
 
     @Override
@@ -72,9 +76,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mSearchedClanReference = FirebaseDatabase
                 .getInstance()
                 .getReference()
-                .child(Constants.FIREBASE_CHILD_SEARCHED_CLAN);
+                .child(Constants.FIREBASE_CHILD_SEARCHED_CLANS);
 
-        mSearchedClanReference.addValueEventListener(new ValueEventListener() { //attach listener
+        mSearchedClanReferenceListener = mSearchedClanReference.addValueEventListener(new ValueEventListener() { //attach listener
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) { //something changed!
                 for (DataSnapshot clanTagSnapshot : dataSnapshot.getChildren()) {
@@ -122,6 +126,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         mImplicitTextView.setText(content);
         mImplicitTextView.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSearchedClanReference.removeEventListener(mSearchedClanReferenceListener);
     }
 
     @Override
