@@ -3,11 +3,14 @@ package com.joekramer.clashofclansplayerlook.ui;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +18,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.joekramer.clashofclansplayerlook.Constants;
 import com.joekramer.clashofclansplayerlook.R;
 import com.joekramer.clashofclansplayerlook.textValidation.TextValidator;
@@ -29,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.titleTextView) TextView mTitleTextView;
     @Bind(R.id.lookupClanButton) Button mLookupClanButton;
     @Bind(R.id.clanTagEditText) EditText mClanTagEditText;
+    @Bind(R.id.implicitTextView) TextView mImplicitTextView;
 
     //shared preferences
 //    private SharedPreferences mSharedPreferences;
@@ -67,6 +74,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .getReference()
                 .child(Constants.FIREBASE_CHILD_SEARCHED_CLAN);
 
+        mSearchedClanReference.addValueEventListener(new ValueEventListener() { //attach listener
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) { //something changed!
+                for (DataSnapshot clanTagSnapshot : dataSnapshot.getChildren()) {
+                    String clanTag = clanTagSnapshot.getValue().toString();
+                    Log.d("ClanTag updated", "clanTag: " + clanTag); //log
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //update UI here if error occurred.
+            }
+        });
 
         //player lookup button
         mLookupClanButton.setOnClickListener(this);
@@ -95,6 +116,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
+
+        //implicit intent
+        SpannableString content = new SpannableString("https://github.com/joe-kramer");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        mImplicitTextView.setText(content);
+        mImplicitTextView.setOnClickListener(this);
     }
 
     @Override
@@ -114,6 +141,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, ClanActivity.class);
             intent.putExtra("clanTag", clanTag);
             startActivity(intent);
+        }
+        if (v == mImplicitTextView) {
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mImplicitTextView.getText().toString()));
+            startActivity(webIntent);
         }
     }
 
