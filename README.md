@@ -83,13 +83,19 @@ must be done in this function to merge our "API work thread" with our UI(Main) t
 * _When the activity is destroyed, cleanup() is called on the adapter so that it will stop listening for changes in Firebase._
 
 #### NavBar
-* _Coming_
 
 #### Login
 * _Create instance of FirebaseAuth_
 * _Validate email and password_
 * _Authenticate user with built-in firebase method called signInWithEmailAndPassword()_
-* _On complete, if Authenitication is successful, we will send intent to Main Activity_
+* _On complete, if Authenitication is successful, we will send intent to Main Activity from AuthStateListener_
+
+#### Register User
+
+#### Progress Dialogs
+* _In CreateAccountActivity, dismissed onComplete in firebase createUserWithEmailAndPassword method_
+* _In LoginActivity, dismissed onComplete of firebase signInWithEmailAndPassword method_
+
 
 
 

@@ -105,10 +105,11 @@ public class ClanActivity extends AppCompatActivity {
         //shared preferences
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentClan = mSharedPreferences.getString(Constants.PREFERENCES_CLANTAG_KEY, null);
-        Log.d(TAG, mRecentClan);
 
         if (mRecentClan != null) {
             getClanInfo(mRecentClan);
+            Log.d(TAG, mRecentClan);
+
         }
     }
 
@@ -196,7 +197,7 @@ public class ClanActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_clan, menu);
         ButterKnife.bind(this);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);

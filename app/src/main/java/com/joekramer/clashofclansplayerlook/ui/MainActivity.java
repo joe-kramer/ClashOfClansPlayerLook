@@ -49,15 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.savedClansListButton)
     Button mSavedClansListButton;
 
-    //shared preferences
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
-    private String mRecentClanTag;
-
-    //firebase
-    private DatabaseReference mSearchedClanReference;
-    private ValueEventListener mSearchedClanReferenceListener;
-
     //Authentication
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -124,12 +115,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         mImplicitTextView.setText(content);
         mImplicitTextView.setOnClickListener(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mSearchedClanReference.removeEventListener(mSearchedClanReferenceListener);
     }
 
     @Override
