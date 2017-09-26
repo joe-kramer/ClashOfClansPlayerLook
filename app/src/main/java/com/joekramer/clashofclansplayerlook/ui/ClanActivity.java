@@ -2,7 +2,6 @@ package com.joekramer.clashofclansplayerlook.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -97,7 +96,12 @@ public class ClanActivity extends AppCompatActivity {
         //set clan
         getClanInfo(clanTag);
 
-//        createAuthProgressDialog();
+        //progress dialog for api call to Lambda
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Fetching Clan info");
+        mAuthProgressDialog.setCancelable(false);
+        mAuthProgressDialog.show();
     }
 
     //TODO: Move to Main for Progress Dialog and Search And other things
@@ -109,11 +113,12 @@ public class ClanActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
+                mAuthProgressDialog.dismiss();
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-//                mAuthProgressDialog.dismiss();
+                mAuthProgressDialog.dismiss();
 
                 try {
                     //Json string coming back with slashes, need to reformat
@@ -237,13 +242,6 @@ public class ClanActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    private void createAuthProgressDialog() {
-//        mAuthProgressDialog = new ProgressDialog(this);
-//        mAuthProgressDialog.setTitle("Loading...");
-//        mAuthProgressDialog.setMessage("Fetching Clan info...");
-//        mAuthProgressDialog.setCancelable(false);
-//    }
 
 //    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
 //

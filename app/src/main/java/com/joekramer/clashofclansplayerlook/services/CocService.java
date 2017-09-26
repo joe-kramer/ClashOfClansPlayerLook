@@ -1,6 +1,8 @@
 package com.joekramer.clashofclansplayerlook.services;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
@@ -30,7 +32,7 @@ import okhttp3.Response;
 public class CocService  {
     public static final String TAG = CocService.class.getSimpleName();
 
-//    get clan info
+    //    get clan info
     public static void findClan(String clanTag, Callback callback) {
         String encodedClanTag;
         try {
@@ -53,6 +55,7 @@ public class CocService  {
         Request request = new Request.Builder().url(url).build();
         Call call = client.newCall(request);
         call.enqueue(callback);
+
     }
 
     //puts api response from clan info api into models
@@ -111,9 +114,6 @@ public class CocService  {
                         warWinStreak, warWins, warTies, warLosses, members, memberList);
             }
         }
-//        catch (IOException e) {
-//            e.printStackTrace();
-//        }
         catch (JSONException e) {
             e.printStackTrace();
         }
