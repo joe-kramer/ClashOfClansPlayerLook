@@ -85,6 +85,13 @@ must be done in this function to merge our "API work thread" with our UI(Main) t
 #### NavBar
 * _Coming_
 
+#### Login
+* _Create instance of FirebaseAuth_
+* _Validate email and password_
+* _Authenticate user with built-in firebase method called signInWithEmailAndPassword()_
+* _On complete, if Authenitication is successful, we will send intent to Main Activity_
+
+
 
 
 
