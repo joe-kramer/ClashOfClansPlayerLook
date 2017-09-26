@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.joekramer.clashofclansplayerlook.Constants;
@@ -29,9 +31,14 @@ public class SavedClansListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_member_list);
         ButterKnife.bind(this);
 
+        //get all saved clans under this users node
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
         mClanReference = FirebaseDatabase
                 .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_CLANS);
+                .getReference(Constants.FIREBASE_CHILD_CLANS)
+                .child(uid);
+
         setUpFirebaseAdapter();
     }
 
