@@ -113,7 +113,7 @@ public class ClanActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                mAuthProgressDialog.dismiss();
+//                mAuthProgressDialog.dismiss();
 
                 try {
                     //Json string coming back with slashes, need to reformat
