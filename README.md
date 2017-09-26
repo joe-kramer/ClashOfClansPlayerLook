@@ -96,6 +96,11 @@ must be done in this function to merge our "API work thread" with our UI(Main) t
 * _In CreateAccountActivity, dismissed onComplete in firebase createUserWithEmailAndPassword method_
 * _In LoginActivity, dismissed onComplete of firebase signInWithEmailAndPassword method_
 
+#### Firebase Database
+* _Array named clans, composed of nodes for each User_ 
+* _Each User has a Node using their unique uid key_
+* _push saved Clan's into associated User's node_
+* _Clan push Id also saved as attribute_
 
 
 

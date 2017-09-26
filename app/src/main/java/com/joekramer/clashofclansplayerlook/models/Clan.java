@@ -26,6 +26,7 @@ public class Clan {
     int members;
     List<Member> memberList = new ArrayList<>();
     double winLossRatio;
+    private String pushId;
 
     public Clan() {}
 
@@ -122,6 +123,14 @@ public class Clan {
     }
 
     public double getWinLossRatio() { return winLossRatio; }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
 
     //TODO getLargeImageURL
 }

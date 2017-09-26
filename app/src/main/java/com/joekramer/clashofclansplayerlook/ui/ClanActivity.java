@@ -29,6 +29,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.joekramer.clashofclansplayerlook.Constants;
@@ -228,10 +230,22 @@ public class ClanActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_saveClan) {
+            //get user id for firebase save
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+
+            //get user's node and set to reference
             DatabaseReference clansRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_CLANS);
-            clansRef.push().setValue(mClan);
+                    .getReference(Constants.FIREBASE_CHILD_CLANS)
+                    .child(uid);
+
+            //push saved clan into user's node under own push Id
+            DatabaseReference pushRef = clansRef.push();
+            String pushId = pushRef.getKey();
+            mClan.setPushId(pushId);
+            pushRef.setValue(mClan);
+
             Toast.makeText(ClanActivity.this, "Clan Saved", Toast.LENGTH_SHORT).show();
             return true;
         }
