@@ -4,24 +4,23 @@ import android.os.Parcelable;
 
 import org.parceler.Parcel;
 
-import java.io.Serializable;
 
 @Parcel
 public class Member implements Parcelable {
-    public String mTag;
-    public String mName;
-    public String mRole;
-    public int mExpLevel;
+    String mTag;
+    String mName;
+    String mRole;
+    int mExpLevel;
     //from league object
-    public int mLeagueId;
-    public String mLeagueName;
-    public String mLeagueIconUrl;
+    int mLeagueId;
+    String mLeagueName;
+    String mLeagueIconUrl;
 
-    public int mTrophies;
-    public int mVersusTrophies;
-    public int mClanRank;
-    public int mDonations;
-    public int mDonationsReceived;
+    int mTrophies;
+    int mVersusTrophies;
+    int mClanRank;
+    int mDonations;
+    int mDonationsReceived;
 
     // empty constructor needed by the Parceler library
     public Member() {}

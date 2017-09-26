@@ -114,7 +114,10 @@ must be done in this function to merge our "API work thread" with our UI(Main) t
 * _Our MemberDetailFragment will be display a members details after being clicked in our Members ListView_
 * _The "ViewPager" in our activity MemberDetailActivity acts as the container for our fragment_
 * _The "PagerTabStrip" in our activity MemberDetailActivity will create a header at the top of our ViewPager which will display the current Members name_
-
+* _To pass the Member information to fragment, the information must be <b>Serialized</b> (the conversion of an object into bytes)_
+* _In our MemberDetailFragment constructor, we will wrap our Member object in a Parcelable and put in bundle_
+* _Bundle will be associated with our new memberDetailFragement_
+* _OnCreate of our MemberDetailFragment, we unwrap our Parcel and create our view based on this Deserialized Member Object_
 
 ###### Sample ClanTags
 * _#G9J8PL8Q_

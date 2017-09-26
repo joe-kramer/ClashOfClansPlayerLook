@@ -1,22 +1,31 @@
 package com.joekramer.clashofclansplayerlook.ui;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.joekramer.clashofclansplayerlook.R;
+import com.joekramer.clashofclansplayerlook.models.Member;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import org.parceler.Parcels;
+
+import butterknife.Bind;
+
 public class MemberDetailFragment extends Fragment {
+    //TODO: Make sure you can tell an interviewer the difference between Serializable and Parcelable.
+    @Bind(R.id.memberFragmentImageView) ImageView mMemberFragmentImageView;
 
+    private Member mMember;
 
-    public MemberDetailFragment() {
-        // Required empty public constructor
+    public static MemberDetailFragment newInstance(Member member) {
+        MemberDetailFragment memberDetailFragment = new MemberDetailFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("member", Parcels.wrap(member));
+        memberDetailFragment.setArguments(args);
+        return memberDetailFragment;
     }
 
 
