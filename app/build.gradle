@@ -50,6 +50,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     compile('com.amazonaws:aws-android-sdk-auth-core:2.6.0@aar') { transitive = true; }
+    //firebase
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.jakewharton:butterknife:7.0.1'
@@ -61,10 +62,10 @@ dependencies {
     compile 'com.amazonaws:aws-android-sdk-s3:2.2.+'
     compile 'com.android.support:multidex:1.0.1'
     compile 'org.parceler:parceler-api:1.1.6'
-    //firebase
     compile 'com.google.firebase:firebase-database:9.0.2'
     compile 'com.firebaseui:firebase-ui-database:0.4.1'
     compile 'com.google.firebase:firebase-auth:9.0.2'
+    compile 'com.android.support:support-v4:26.+'
     testCompile 'junit:junit:4.12'
     testCompile 'org.robolectric:robolectric:3.0'
     testCompile 'org.robolectric:shadows-support-v4:3.0'

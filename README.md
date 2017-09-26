@@ -109,7 +109,14 @@ must be done in this function to merge our "API work thread" with our UI(Main) t
 #### Shared Preferences
 * _Used to save last user logged in, displays users username next time they visit the login page_
 
-##### ClanTags
+#### Custom Fragments
+* _Fragments are "The component of the android world"_
+* _Our MemberDetailFragment will be display a members details after being clicked in our Members ListView_
+* _The "ViewPager" in our activity MemberDetailActivity acts as the container for our fragment_
+* _The "PagerTabStrip" in our activity MemberDetailActivity will create a header at the top of our ViewPager which will display the current Members name_
+
+
+###### Sample ClanTags
 * _#G9J8PL8Q_
 * _#QGJY8UR_
 * _#PO8RVRV9_

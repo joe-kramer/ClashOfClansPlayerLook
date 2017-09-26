@@ -125,7 +125,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading clan tag..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                     <TextView
                         android:id="@+id/clanDescriptionTextView"
@@ -133,7 +134,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading clan description..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                 </LinearLayout>
 
@@ -150,7 +152,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading clan type..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                     <TextView
                         android:id="@+id/clanRequiredTrophiesTextView"
@@ -158,7 +161,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading required trophies"
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                     <TextView
                         android:id="@+id/clanLocationTextView"
@@ -166,7 +170,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading location..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                 </LinearLayout>
 
@@ -212,7 +217,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading war streak..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                     <TextView
                         android:id="@+id/clanPointsTextView"
@@ -220,7 +226,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading clan points..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                     <TextView
                         android:id="@+id/clanVersusPointsTextView"
@@ -228,7 +235,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading clan versus points..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
                 </LinearLayout>
 
                 <!--clan info/far right section-->
@@ -244,7 +252,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading war wins..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                     <TextView
                         android:id="@+id/warTiesTextView"
@@ -252,7 +261,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading war ties..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                     <TextView
                         android:id="@+id/warLossesTextView"
@@ -260,7 +270,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading war losses..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                     <TextView
                         android:id="@+id/warWinPercentageTextView"
@@ -268,7 +279,8 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:text="Loading war win percentage..."
-                        android:textSize="14dp" />
+                        android:textSize="14dp"
+                        android:gravity="center_horizontal"/>
 
                 </LinearLayout>
             </LinearLayout>
