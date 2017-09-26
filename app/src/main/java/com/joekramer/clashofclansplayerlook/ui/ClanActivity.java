@@ -48,11 +48,7 @@ import com.squareup.picasso.Target;
 import org.parceler.Parcels;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,8 +57,6 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
-
-import static java.security.AccessController.getContext;
 
 public class ClanActivity extends AppCompatActivity {
     public static final String TAG = ClanActivity.class.getSimpleName();
@@ -84,11 +78,6 @@ public class ClanActivity extends AppCompatActivity {
     @Bind(R.id.warLossesTextView) TextView mWarLossesTextView;
     @Bind(R.id.warWinPercentageTextView) TextView mWarWinPercentageTextView;
 
-    //shared preferences
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
-    private String mRecentClan;
-
     //Progress dialog
     private ProgressDialog mAuthProgressDialog;
 
@@ -108,24 +97,12 @@ public class ClanActivity extends AppCompatActivity {
         //set clan
         getClanInfo(clanTag);
 
-        //shared preferences
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentClan = mSharedPreferences.getString(Constants.PREFERENCES_CLANTAG_KEY, null);
-
-        if (mRecentClan != null) {
-            getClanInfo(mRecentClan);
-            Log.d(TAG, mRecentClan);
-
-        }
-
 //        createAuthProgressDialog();
     }
 
     //TODO: Move to Main for Progress Dialog and Search And other things
     private void getClanInfo(String clanTag) {
         final CocService cocService = new CocService();
-
-//        mAuthProgressDialog.show();
 
         cocService.findClan(clanTag, new Callback() {
 
@@ -136,7 +113,7 @@ public class ClanActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-//                mAuthProgressDialog.dismiss();
+                mAuthProgressDialog.dismiss();
 
                 try {
                     //Json string coming back with slashes, need to reformat
@@ -215,9 +192,6 @@ public class ClanActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_clan, menu);
         ButterKnife.bind(this);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
-
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
@@ -225,7 +199,6 @@ public class ClanActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                addToSharedPreferences(query);
                 getClanInfo(query);
                 return false;
             }
@@ -265,17 +238,12 @@ public class ClanActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void addToSharedPreferences(String clanTag) {
-        mEditor.putString(Constants.PREFERENCES_CLANTAG_KEY, clanTag)
-                .apply();
-    }
-
-    private void createAuthProgressDialog() {
-        mAuthProgressDialog = new ProgressDialog(this);
-        mAuthProgressDialog.setTitle("Loading...");
-        mAuthProgressDialog.setMessage("Fetching Clan info...");
-        mAuthProgressDialog.setCancelable(false);
-    }
+//    private void createAuthProgressDialog() {
+//        mAuthProgressDialog = new ProgressDialog(this);
+//        mAuthProgressDialog.setTitle("Loading...");
+//        mAuthProgressDialog.setMessage("Fetching Clan info...");
+//        mAuthProgressDialog.setCancelable(false);
+//    }
 
 //    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
 //

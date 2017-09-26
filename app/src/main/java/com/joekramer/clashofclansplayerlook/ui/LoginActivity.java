@@ -2,6 +2,8 @@ package com.joekramer.clashofclansplayerlook.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.joekramer.clashofclansplayerlook.Constants;
 import com.joekramer.clashofclansplayerlook.R;
 
 import butterknife.Bind;
@@ -35,6 +38,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //progress dialog
     private ProgressDialog mAuthProgressDialog;
+
+    //shared preferences
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +70,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         };
 
         createAuthProgressDialog();
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        //shared preferences
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentUser = mSharedPreferences.getString(Constants.PREFERENCES_USERNAME_KEY, null);
+
+
+        if (mRecentUser != null) {
+            //send to player activity
+            Log.d(TAG, mRecentUser);
+            mEmailEditText.setText(mRecentUser);
+        }
     }
 
     @Override
@@ -96,6 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         mAuthProgressDialog.dismiss();
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+                        addToSharedPreferences(mEmailEditText.getText().toString());
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
@@ -125,4 +148,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuthProgressDialog.setCancelable(false);
     }
 
+    private void addToSharedPreferences(String username) {
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+        Log.d(TAG + " User preferenecs: ", username);
+        mEditor.putString(Constants.PREFERENCES_USERNAME_KEY, username)
+                .apply();
+    }
 }

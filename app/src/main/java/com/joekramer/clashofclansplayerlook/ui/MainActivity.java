@@ -38,16 +38,11 @@ import butterknife.ButterKnife;
 //TODO: implement OnClick Interface (week 1 tuesday)
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String TAG = MainActivity.class.getSimpleName();
-    @Bind(R.id.titleTextView)
-    TextView mTitleTextView;
-    @Bind(R.id.lookupClanButton)
-    Button mLookupClanButton;
-    @Bind(R.id.clanTagEditText)
-    EditText mClanTagEditText;
-    @Bind(R.id.implicitTextView)
-    TextView mImplicitTextView;
-    @Bind(R.id.savedClansListButton)
-    Button mSavedClansListButton;
+    @Bind(R.id.titleTextView) TextView mTitleTextView;
+    @Bind(R.id.lookupClanButton) Button mLookupClanButton;
+    @Bind(R.id.clanTagEditText) EditText mClanTagEditText;
+    @Bind(R.id.implicitTextView) TextView mImplicitTextView;
+    @Bind(R.id.savedClansListButton) Button mSavedClansListButton;
 
     //Authentication
     private FirebaseAuth mAuth;

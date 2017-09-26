@@ -102,6 +102,10 @@ must be done in this function to merge our "API work thread" with our UI(Main) t
 * _push saved Clan's into associated User's node_
 * _Clan push Id also saved as attribute_
 
+#### Shared Preferences
+* _Used to save last user logged in, displays users username next time they visit the login page_
+
+
 
 
 
