@@ -44,10 +44,14 @@ a successful response.
 ## App:
 
 #### Setup
-* _clone down app_
-* _input clan tag into input on first page (#QGJY8UR)_
-* _clan tag is urlEncoded and passed to service_
-* _api call is made through api gateway to lambda function and returns json_
+* _Clone down app_
+* _Open in android studio_
+* _Run on emulator (Nexus 6P API 26)_
+* _Create user and login_
+* _Input clan tag into input on first page (see tags at bottom of README)_
+* _ClanTag is passed to service_
+* _ClanTag urlEncoded_ 
+* _Api call is made through api gateway to AWS Lambda function and returns JSON result_
 
 ### App Features
 
@@ -105,7 +109,10 @@ must be done in this function to merge our "API work thread" with our UI(Main) t
 #### Shared Preferences
 * _Used to save last user logged in, displays users username next time they visit the login page_
 
-
+##### ClanTags
+* _#G9J8PL8Q_
+* _#QGJY8UR_
+* _#PO8RVRV9_
 
 
 
