@@ -1,5 +1,6 @@
 package com.joekramer.clashofclansplayerlook.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -88,6 +89,9 @@ public class ClanActivity extends AppCompatActivity {
     private SharedPreferences.Editor mEditor;
     private String mRecentClan;
 
+    //Progress dialog
+    private ProgressDialog mAuthProgressDialog;
+
     //background
 //    @Bind(R.id.picLinearLayout) LinearLayout mPicLinearLayout;
 
@@ -113,11 +117,18 @@ public class ClanActivity extends AppCompatActivity {
             Log.d(TAG, mRecentClan);
 
         }
+
+//        createAuthProgressDialog();
     }
 
+    //TODO: Move to Main for Progress Dialog and Search And other things
     private void getClanInfo(String clanTag) {
         final CocService cocService = new CocService();
+
+//        mAuthProgressDialog.show();
+
         cocService.findClan(clanTag, new Callback() {
+
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
@@ -125,6 +136,8 @@ public class ClanActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+//                mAuthProgressDialog.dismiss();
+
                 try {
                     //Json string coming back with slashes, need to reformat
                     String jsonData = response.body().string();
@@ -255,6 +268,13 @@ public class ClanActivity extends AppCompatActivity {
     private void addToSharedPreferences(String clanTag) {
         mEditor.putString(Constants.PREFERENCES_CLANTAG_KEY, clanTag)
                 .apply();
+    }
+
+    private void createAuthProgressDialog() {
+        mAuthProgressDialog = new ProgressDialog(this);
+        mAuthProgressDialog.setTitle("Loading...");
+        mAuthProgressDialog.setMessage("Fetching Clan info...");
+        mAuthProgressDialog.setCancelable(false);
     }
 
 //    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
