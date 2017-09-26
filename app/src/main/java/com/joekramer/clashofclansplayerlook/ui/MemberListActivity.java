@@ -45,4 +45,6 @@ public class MemberListActivity extends AppCompatActivity {
         mMemberListRecyclerView.setLayoutManager(layoutManager);
         mMemberListRecyclerView.setHasFixedSize(true);
     }
+
+    //TODO: ADD members to fragment view
 }

@@ -104,7 +104,6 @@ public class ClanActivity extends AppCompatActivity {
         mAuthProgressDialog.show();
     }
 
-    //TODO: Move to Main for Progress Dialog and Search And other things
     private void getClanInfo(String clanTag) {
         final CocService cocService = new CocService();
 
