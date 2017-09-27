@@ -112,7 +112,7 @@
                             android:text="Trophies"
                             android:id="@+id/memberFragmentTrophiesTextView"
                             android:gravity="center_horizontal"
-                            android:textSize="18dp"/>
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                             android:text="versus Trophies"
                             android:id="@+id/memberFragmentVersusTrophiesTextView"
                             android:gravity="center_horizontal"
-                            android:textSize="18dp"/>
+                            android:textSize="15dp"/>
                     </LinearLayout>
 
                     <!--stats right-->
@@ -138,7 +138,7 @@
                             android:text="clan rank"
                             android:id="@+id/memberFragmentClanRankTextView"
                             android:gravity="center_horizontal"
-                            android:textSize="18dp"/>
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -147,7 +147,7 @@
                             android:text="donations"
                             android:id="@+id/memberFragmentDonationsTextView"
                             android:gravity="center_horizontal"
-                            android:textSize="18dp"/>
+                            android:textSize="15dp"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -156,7 +156,7 @@
                             android:text="donations recieved"
                             android:id="@+id/memberFragmentDonationsRecievedTextView"
                             android:gravity="center_horizontal"
-                            android:textSize="18dp"/>
+                            android:textSize="15dp"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -192,7 +192,7 @@
                             android:text="League Name"
                             android:id="@+id/memberFragmentLeagueNameTextView"
                             android:gravity="center_horizontal"
-                            android:textSize="20dp"/>
+                            android:textSize="15dp"/>
                     </LinearLayout>
 
                     <!--league right-->
@@ -209,7 +209,7 @@
                             android:text="League id"
                             android:id="@+id/memberFragmentLeagueIdTextView"
                             android:gravity="center_horizontal"
-                            android:textSize="20dp"/>
+                            android:textSize="15dp"/>
                     </LinearLayout>
 
                 </LinearLayout>
