@@ -11,16 +11,15 @@ public class Member implements Parcelable {
     String mName;
     String mRole;
     int mExpLevel;
-    //from league object
-    int mLeagueId;
-    String mLeagueName;
-    String mLeagueIconUrl;
-
     int mTrophies;
     int mVersusTrophies;
     int mClanRank;
     int mDonations;
     int mDonationsReceived;
+    //from league object
+    int mLeagueId;
+    String mLeagueName;
+    String mLeagueIconUrl;
 
     // empty constructor needed by the Parceler library
     public Member() {}

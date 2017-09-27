@@ -1,4 +1,4 @@
-package com.joekramer.clashofclansplayerlook.adapters;
+package com.joekramer.clashofclansplayerlook.viewholders;
 
 
 import android.content.Context;
@@ -9,22 +9,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.joekramer.clashofclansplayerlook.Constants;
 import com.joekramer.clashofclansplayerlook.R;
 import com.joekramer.clashofclansplayerlook.models.Clan;
 import com.joekramer.clashofclansplayerlook.ui.ClanActivity;
 import com.squareup.picasso.Picasso;
-
-import org.parceler.Parcels;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
 
 public class FirebaseClanViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final String TAG = FirebaseClanViewHolder.class.getSimpleName();

@@ -18,6 +18,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MemberDetailFragment extends Fragment {
+    private static final int MAX_WIDTH = 400;
+    private static final int MAX_HEIGHT = 400;
     //TODO: Make sure you can tell an interviewer the difference between Serializable and Parcelable.
     @Bind(R.id.memberFragmentImageView) ImageView mMemberFragmentImageView;
     @Bind(R.id.memberFragmentNameTextView) TextView mMemberFragmentNameTextView;
@@ -53,7 +55,6 @@ public class MemberDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_member_detail, container, false);
         ButterKnife.bind(this, view);
 
-        Picasso.with(view.getContext()).load(mMember.getLeagueIconUrl()).into(mMemberFragmentImageView);
         mMemberFragmentNameTextView.setText(mMember.getName());
         mMemberFragmentExpLevelTextView.setText("Exp Level: " + mMember.getExpLevel());
         mMemberFragmentRoleTextView.setText(mMember.getRole());
@@ -64,6 +65,12 @@ public class MemberDetailFragment extends Fragment {
         mMemberFragmentDonationsRecievedTextView.setText("Donations Recieved: " + mMember.getDonationsReceived());
         mMemberFragmentLeagueNameTextView.setText("League: " + mMember.getLeagueName());
         mMemberFragmentLeagueIdTextView.setText("League Id: " + mMember.getLeagueId());
+
+        Picasso.with(view.getContext())
+                .load(mMember.getLeagueIconUrl())
+                .resize(MAX_WIDTH, MAX_HEIGHT)
+                .centerCrop()
+                .into(mMemberFragmentImageView);
 
         return view;
     }

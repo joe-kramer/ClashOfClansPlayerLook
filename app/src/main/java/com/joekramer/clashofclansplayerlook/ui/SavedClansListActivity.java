@@ -12,7 +12,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.joekramer.clashofclansplayerlook.Constants;
 import com.joekramer.clashofclansplayerlook.R;
-import com.joekramer.clashofclansplayerlook.adapters.FirebaseClanViewHolder;
+import com.joekramer.clashofclansplayerlook.viewholders.FirebaseClanViewHolder;
 import com.joekramer.clashofclansplayerlook.models.Clan;
 
 import butterknife.Bind;

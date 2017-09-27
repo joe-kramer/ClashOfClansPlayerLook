@@ -125,62 +125,62 @@ public class ClanActivity extends AppCompatActivity {
                     jsonData = jsonData.trim();
                     jsonData = jsonData.substring(1, jsonData.length() - 1);
                     jsonData = jsonData.replace("\\","");
-                        Log.v(TAG, jsonData);
-                        //TODO could just put jsonData as response
-                        mClan = CocService.processClanResults(response, jsonData);
+                    Log.v(TAG, jsonData);
+                    //TODO could just put jsonData as response
+                    mClan = CocService.processClanResults(response, jsonData);
 
-                        //put response back onto main thread
-                        ClanActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //CLAN INFO
-                                mClanNameTextView.setText(mClan.getName());
-                                mClanLevelTextView.setText("Clan Level: " + mClan.getClanLevel());
-                                //TODO put font on all/ use coc font
-                                //font
-                                Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
-                                mClanNameTextView.setTypeface(titleFont);
-                                //TODO make description text area size adjustable. or click to see rest
-                                mClanDescriptionTextView.setText(mClan.getDescription());
-                                //TODO center badge and make width based off height
+                    //put response back onto main thread
+                    ClanActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                        //CLAN INFO
+                        mClanNameTextView.setText(mClan.getName());
+                        mClanLevelTextView.setText("Clan Level: " + mClan.getClanLevel());
+                        //TODO put font on all/ use coc font
+                        //font
+                        Typeface titleFont = Typeface.createFromAsset(getAssets(), "fonts/Sansation-Bold.ttf");
+                        mClanNameTextView.setTypeface(titleFont);
+                        //TODO make description text area size adjustable. or click to see rest
+                        mClanDescriptionTextView.setText(mClan.getDescription());
+                        //TODO center badge and make width based off height
 //                                //clan badge pic
-                                Picasso.with(getApplicationContext()).load(mClan.getBadgeUrl())
-                                .into(mClanBadgeImageView);
-                                mClanTagTextView.setText("Tag: " + mClan.getTag());
-                                mClanTypeTextView.setText("Type: " + mClan.getType());
-                                mClanRequiredTrophiesTextView.setText("Required Trophies: " + mClan.getRequiredTrophies());
-                                mClanLocationTextView.setText(mClan.getLocationName());
-                                mClanPointsTextView.setText("Clan Points: " + mClan.getClanPoints());
-                                mClanVersusPointsTextView.setText("Clan Versus Points: " + mClan.getClanVersusPoints());
-                                mWarStreakTextView.setText("Win Streak: " + mClan.getWarWinStreak());
-                                mWarWinsTextView.setText("War Wins: " + mClan.getWarWins());
-                                mWarTiesTextView.setText("War Ties: " + mClan.getWarTies());
-                                mWarLossesTextView.setText("War Losses: " + mClan.getWarLosses());
-                                DecimalFormat formatter = new DecimalFormat("#0.00");
-                                mWarWinPercentageTextView.setText("Win/Loss Ratio: " + formatter.format(mClan.getWinLossRatio()));
+                        Picasso.with(getApplicationContext()).load(mClan.getBadgeUrl())
+                        .into(mClanBadgeImageView);
+                        mClanTagTextView.setText("Tag: " + mClan.getTag());
+                        mClanTypeTextView.setText("Type: " + mClan.getType());
+                        mClanRequiredTrophiesTextView.setText("Required Trophies: " + mClan.getRequiredTrophies());
+                        mClanLocationTextView.setText(mClan.getLocationName());
+                        mClanPointsTextView.setText("Clan Points: " + mClan.getClanPoints());
+                        mClanVersusPointsTextView.setText("Clan Versus Points: " + mClan.getClanVersusPoints());
+                        mWarStreakTextView.setText("Win Streak: " + mClan.getWarWinStreak());
+                        mWarWinsTextView.setText("War Wins: " + mClan.getWarWins());
+                        mWarTiesTextView.setText("War Ties: " + mClan.getWarTies());
+                        mWarLossesTextView.setText("War Losses: " + mClan.getWarLosses());
+                        DecimalFormat formatter = new DecimalFormat("#0.00");
+                        mWarWinPercentageTextView.setText("Win/Loss Ratio: " + formatter.format(mClan.getWinLossRatio()));
 
-                                //set button
-                                mGetMembersButton.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        //TODO push only memberlist array, not whole clan
-                                        List<Member> memberList1 = mClan.getMemberList();
-                                        ArrayList<Member> memberList = (ArrayList<Member>) memberList1;
+                        //set button
+                        mGetMembersButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //TODO push only memberlist array, not whole clan
+                                List<Member> memberList1 = mClan.getMemberList();
+                                ArrayList<Member> memberList = (ArrayList<Member>) memberList1;
 
-                                        //send to player activity
-                                        Intent intent = new Intent(ClanActivity.this, MemberListActivity.class);
-                                        Bundle bundle = new Bundle();
-                                        bundle.putParcelableArrayList("members", memberList);
-                                        intent.putExtra("membersBundle", bundle);
-                                        startActivity(intent);
-                                    }
-                                });
-                                mGetMembersButton.setText("View clan's " + mClan.getMembers() + " members");
-
-                                //background on linear clan_list_item
-//                                new LoadBackground(mClan.mBadgeUrl, "clanBackground").execute();
+                                //send to player activity
+                                Intent intent = new Intent(ClanActivity.this, MemberListActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelableArrayList("members", memberList);
+                                intent.putExtra("membersBundle", bundle);
+                                startActivity(intent);
                             }
                         });
+                        mGetMembersButton.setText("View clan's " + mClan.getMembers() + " members");
+
+                        //background on linear clan_list_item
+//                                new LoadBackground(mClan.mBadgeUrl, "clanBackground").execute();
+                        }
+                    });
 
                 } catch (IOException e) {
                     e.printStackTrace();

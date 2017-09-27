@@ -96,7 +96,14 @@ public class CocService  {
                     int memberExpLevel = memberJSON.getInt("expLevel");
                     int leagueId = memberJSON.getJSONObject("league").getInt("id");
                     String leagueName = memberJSON.getJSONObject("league").getString("name");
-                    String leagueIconUrl = memberJSON.getJSONObject("league").getJSONObject("iconUrls").getString("small");
+                    String leagueIconUrl;
+                    try {
+                        leagueIconUrl = memberJSON.getJSONObject("league").getJSONObject("iconUrls").getString("medium");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "Members medium league badge NA");
+                        leagueIconUrl = memberJSON.getJSONObject("league").getJSONObject("iconUrls").getString("small");
+                    }
                     int memberTrophies = memberJSON.getInt("trophies");
                     int memberVersusTrophies = memberJSON.getInt("versusTrophies");
                     int memberClanRank = memberJSON.getInt("clanRank");

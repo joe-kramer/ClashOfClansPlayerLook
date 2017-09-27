@@ -1,11 +1,9 @@
-package com.joekramer.clashofclansplayerlook.textValidation;
+package com.joekramer.clashofclansplayerlook.textvalidation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.joekramer.clashofclansplayerlook.ui.MainActivity;
 
 
 public abstract class TextValidator implements TextWatcher {
