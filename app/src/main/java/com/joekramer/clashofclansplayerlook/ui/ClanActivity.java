@@ -9,12 +9,14 @@ import android.os.AsyncTask;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -46,6 +48,7 @@ import com.squareup.picasso.Target;
 
 import org.parceler.Parcels;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -247,46 +250,4 @@ public class ClanActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    private class LoadBackground extends AsyncTask<String, Void, Drawable> {
-//
-//        private String imageUrl, imageName;
-//
-//        public LoadBackground(String url, String file_name) {
-//            this.imageUrl = url;
-//            this.imageName = file_name;
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected Drawable doInBackground(String... urls) {
-//
-//            try {
-//                InputStream is = (InputStream) this.fetch(this.imageUrl);
-//                Drawable d = Drawable.createFromStream(is, this.imageName);
-//                return d;
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//                return null;
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return null;
-//            }
-//        }
-//
-//        private Object fetch(String address) throws MalformedURLException, IOException {
-//            URL url = new URL(address);
-//            Object content = url.getContent();
-//            return content;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Drawable result) {
-//            super.onPostExecute(result);
-//            mPicLinearLayout.setBackground(result);
-//        }
-//    }
 }

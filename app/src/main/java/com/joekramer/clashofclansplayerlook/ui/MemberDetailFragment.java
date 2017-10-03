@@ -1,18 +1,31 @@
 package com.joekramer.clashofclansplayerlook.ui;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.joekramer.clashofclansplayerlook.Constants;
 import com.joekramer.clashofclansplayerlook.R;
 import com.joekramer.clashofclansplayerlook.models.Member;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
+
+import java.io.ByteArrayOutputStream;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,6 +33,7 @@ import butterknife.ButterKnife;
 public class MemberDetailFragment extends Fragment {
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 400;
+    private static final int REQUEST_IMAGE_CAPTURE = 111;
     //TODO: Make sure you can tell an interviewer the difference between Serializable and Parcelable.
     @Bind(R.id.memberFragmentImageView) ImageView mMemberFragmentImageView;
     @Bind(R.id.memberFragmentNameTextView) TextView mMemberFragmentNameTextView;
@@ -47,6 +61,7 @@ public class MemberDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMember = Parcels.unwrap(getArguments().getParcelable("member"));
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -74,5 +89,54 @@ public class MemberDetailFragment extends Fragment {
 
         return view;
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+//        if (mSource.equals(Constants.SOURCE_SAVED)) {
+        inflater.inflate(R.menu.menu_photo, menu);
+//        } else {
+//            inflater.inflate(R.menu.menu_main, menu);
+//        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_photo:
+                onLaunchCamera();
+            default:
+                break;
+        }
+        return false;
+    }
+
+    public void onLaunchCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == getActivity().RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mMemberFragmentImageView.setImageBitmap(imageBitmap);
+//            encodeBitmapAndSaveToFirebase(imageBitmap);
+        }
+    }
+
+//    public void encodeBitmapAndSaveToFirebase(Bitmap bitmap) {
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//        String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
+//        DatabaseReference ref = FirebaseDatabase.getInstance()
+//                .getReference(Constants.FIREBASE_CHILD_CLANS)
+//                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                .child(Constants.PHOTO);
+//        ref.setValue(imageEncoded);
+//    }
 
 }

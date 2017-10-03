@@ -7,4 +7,5 @@ public class Constants {
     public static final String COC_API_GATEWAY_CLANS = "https://rryhypl8c8.execute-api.us-west-2.amazonaws.com/beta/clans";
     public static final String PREFERENCES_USERNAME_KEY = "username";
     public static final String FIREBASE_CHILD_CLANS = "clans";
+    public static final String PHOTO = "photo";
 }
