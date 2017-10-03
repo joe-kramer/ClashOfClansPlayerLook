@@ -59,6 +59,8 @@ import okhttp3.Response;
 
 public class ClanActivity extends AppCompatActivity {
     public static final String TAG = ClanActivity.class.getSimpleName();
+    private static final int MAX_WIDTH = 300;
+    private static final int MAX_HEIGHT = 300;
     public Clan mClan = null;
     @Bind(R.id.getMembersButton) Button mGetMembersButton;
     @Bind(R.id.clanNameTextView) TextView mClanNameTextView;
@@ -144,8 +146,11 @@ public class ClanActivity extends AppCompatActivity {
                         mClanDescriptionTextView.setText(mClan.getDescription());
                         //TODO center badge and make width based off height
 //                                //clan badge pic
-                        Picasso.with(getApplicationContext()).load(mClan.getBadgeUrl())
-                        .into(mClanBadgeImageView);
+                        Picasso.with(getApplicationContext())
+                                .load(mClan.getBadgeUrl())
+                                .resize(MAX_WIDTH, MAX_HEIGHT)
+                                .centerCrop()
+                                .into(mClanBadgeImageView);
                         mClanTagTextView.setText("Tag: " + mClan.getTag());
                         mClanTypeTextView.setText("Type: " + mClan.getType());
                         mClanRequiredTrophiesTextView.setText("Required Trophies: " + mClan.getRequiredTrophies());
